@@ -62,7 +62,15 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
      - assets/house-line-fill 1.png
-
+     - assets/app_pen.png
+     - assets/cic.png
+     - assets/img.png
+     - assets/pen.png
+     - assets/Line 8.png
+     - assets/place_edit/h1.png
+     - assets/place_edit/h2.png
+     - assets/place_edit/h3.png
+     - assets/place_edit/h4.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
