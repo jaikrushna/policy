@@ -126,54 +126,87 @@ class _placeeditState extends State<placeedit> {
                     color: Color(0xffBBF5F1),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Row(
+                      children: [
+                        Flexible(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Color(0xff757575),
+                            ),
+                          ),
+                        ),
+                        Container(
+                            child: Column(
                           children: [
-                            Image.asset(
-                              'assets/Line 8.png',
-                            ),
-                            Text(
-                              'New Place',
-                              style: TextStyle(color: Color(0xff205955)),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              child: Image.asset(
-                                'assets/pen.png',
+                            Row(children: [
+                              Image.asset(
+                                'assets/Line 8.png',
                               ),
-                            ),
-                            TextField(
-                                style: TextStyle(
-                                  color: Colors.black87,
-                                ),
-                                textAlign: TextAlign.left,
-                                onChanged: (value) {},
-                                decoration:
-                                    InputDecoration(hintText: 'Place Name')),
-                          ],
-                        ),
-                        ListTile(
-                          tileColor: Color(0xffBBF5F1),
-                          // leading: Container(
-                          //   child: Image.asset(
-                          //     'assets/pen.png',
-                          //     scale: 5,
-                          //   ),
-                          // ),
-                          onTap: () {},
-                          trailing: TextField(
-                              style: TextStyle(
-                                color: Colors.black87,
+                              Text(
+                                'New Place',
+                                style: TextStyle(color: Color(0xff205955)),
                               ),
-                              textAlign: TextAlign.left,
-                              onChanged: (value) {},
-                              decoration:
-                                  InputDecoration(hintText: 'Place Name')),
-                        ),
+                            ]),
+                            Row(
+                              children: [
+                                TextField(
+                                    style: TextStyle(
+                                      color: Colors.black87,
+                                    ),
+                                    textAlign: TextAlign.left,
+                                    onChanged: (value) {},
+                                    decoration: InputDecoration(
+                                        hintText: 'Place Name')),
+                              ],
+                            )
+                          ],
+                        )),
+                        // Row(
+                        //   children: [
+                        //     TextField(
+                        //         style: TextStyle(
+                        //           color: Colors.black87,
+                        //         ),
+                        //         textAlign: TextAlign.left,
+                        //         onChanged: (value) {},
+                        //         decoration:
+                        //             InputDecoration(hintText: 'Place Name')),
+                        //   ],
+                        // )
+                        // Row(
+                        //   children: [
+                        //     Container(
+                        //         // child: Image.asset(
+                        //         //   'assets/pen.png',
+                        //         // ),
+                        //         ),
+                        //     TextField(
+                        //         style: TextStyle(
+                        //           color: Colors.black87,
+                        //         ),
+                        //         textAlign: TextAlign.left,
+                        //         onChanged: (value) {},
+                        //         decoration:
+                        //             InputDecoration(hintText: 'Place Name')),
+                        //   ],
+                        // ),
+                        //     ListTile(
+                        //       tileColor: Color(0xffBBF5F1),
+                        //       // leading: Container(
+                        //       //   child: Image.asset(
+                        //       //     'assets/pen.png',
+                        //       //     scale: 5,
+                        //       //   ),
+                        //       // ),
+                        //       onTap: () {},
+                        //       trailing: TextField(
+                        //           style: TextStyle(
+                        //             color: Colors.black87,
+                        //           ),
+                        //           textAlign: TextAlign.left,
+                        //           onChanged: (value) {},
+                        //           decoration:
+                        //               InputDecoration(hintText: 'Place Name')),
+                        //     ),
                         // ListTile(
                         //   tileColor: Color(0xffBBF5F1),
                         //   // leading: Container(

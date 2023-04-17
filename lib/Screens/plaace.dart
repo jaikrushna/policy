@@ -10,7 +10,8 @@ class place extends StatefulWidget {
 
 class _placeState extends State<place> {
   int _currentIndex = 0;
-
+  bool sel = true;
+  bool notsel = true;
   final _inactiveColor = Color(0xff71757A);
   @override
   Widget build(BuildContext context) {
@@ -35,12 +36,21 @@ class _placeState extends State<place> {
             height: size.height * 0.005,
           ),
           Card(
-            elevation: 10,
+            elevation: 3,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
             ),
             child: ListTile(
-              selected: true,
+              onTap: () {
+                if (sel == true) {
+                  sel = false;
+                  setState(() {});
+                } else {
+                  sel == true;
+                  setState(() {});
+                }
+              },
+              selected: sel,
               focusColor: Color(0xffA9C8C5),
               tileColor: Colors.white,
               selectedTileColor: Color(0xffA9C8C5),
@@ -48,11 +58,11 @@ class _placeState extends State<place> {
                 child: Image.asset('assets/house-line-fill 1.png'),
               ),
               trailing: CircleAvatar(
-                backgroundColor: Color(0xffD9D9D9F),
+                backgroundColor: sel ? Color(0xffD9D9D9F) : Color(0xff29756F),
                 child: Text(
                   '40',
                   style: TextStyle(
-                    color: Colors.black,
+                    color: sel ? Colors.black : Colors.white60,
                   ),
                 ),
               ),
@@ -78,6 +88,15 @@ class _placeState extends State<place> {
               borderRadius: BorderRadius.circular(15),
             ),
             child: ListTile(
+              onTap: () {
+                if (sel == true) {
+                  sel = false;
+                  setState(() {});
+                } else {
+                  sel == true;
+                  setState(() {});
+                }
+              },
               selected: false,
               focusColor: Color(0xffA9C8C5),
               tileColor: Colors.white,

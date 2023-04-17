@@ -71,6 +71,7 @@ flutter:
      - assets/place_edit/h2.png
      - assets/place_edit/h3.png
      - assets/place_edit/h4.png
+     - assets/Acc/trailing.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
