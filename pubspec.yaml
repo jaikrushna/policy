@@ -72,6 +72,9 @@ flutter:
      - assets/place_edit/h3.png
      - assets/place_edit/h4.png
      - assets/Acc/trailing.png
+     - assets/Acc/image 27.png
+     - assets/Acc/calendar.png
+     - assets/Acc/call.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
