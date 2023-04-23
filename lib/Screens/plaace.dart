@@ -1,5 +1,6 @@
 import 'package:internship2/Providers/custom_animated_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:internship2/Screens/place_edit.dart';
 
 class place extends StatefulWidget {
   const place({Key? key}) : super(key: key);
@@ -207,7 +208,12 @@ class _placeState extends State<place> {
       floatingActionButton: Container(
         width: size.width * 0.45,
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const placeedit()),
+            );
+          },
           child: Text(
             'Create Place',
           ),

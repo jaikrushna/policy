@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:internship2/Providers/scheme_selector.dart';
 import 'package:internship2/Providers/custom_animated_bottom_bar.dart';
 
-class acc_master extends StatefulWidget {
-  const acc_master({Key? key}) : super(key: key);
+import '../../models/views/displayed_data.dart';
 
+class acc_master extends StatefulWidget {
   @override
   State<acc_master> createState() => _acc_masterState();
 }
@@ -12,13 +12,14 @@ class acc_master extends StatefulWidget {
 class _acc_masterState extends State<acc_master> {
   int _currentIndex = 1;
   int _currentscheme = 0;
-  final _inactiveColor = Color(0xff71757A);
+  final _inactiveColor = Color(0xffEBEBEB);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        elevation: 0,
         leading: Icon(
           Icons.arrow_back_ios_new_outlined,
           color: Color(0xff144743),
@@ -30,12 +31,13 @@ class _acc_masterState extends State<acc_master> {
               width: size.width * 0.60,
               height: size.height * 0.05,
               decoration: BoxDecoration(
-                  color: Colors.grey, borderRadius: BorderRadius.circular(18)),
+                  color: Color(0XFFEBEBEB),
+                  borderRadius: BorderRadius.circular(18)),
               child: TextField(
                 decoration: InputDecoration(
                     prefixIcon: const Icon(
                       Icons.search,
-                      color: Colors.white,
+                      color: Color(0XFF999999),
                     ),
                     hintText: 'Search',
                     border: InputBorder.none),
@@ -68,161 +70,7 @@ class _acc_masterState extends State<acc_master> {
               child: _buildAboveBar(),
             ),
           ),
-          Container(
-            child: Flexible(
-                child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Row(
-                      children: [
-                        Text(
-                          'Chiran Road',
-                          textAlign: TextAlign.left,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 10, bottom: 10.0, left: 20.0, right: 20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Ashish Jain'),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(40),
-                            ),
-                            border: Border.all(
-                              width: 2,
-                              color: Colors.green,
-                              style: BorderStyle.solid,
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Text('May 2007'),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 10, bottom: 10.0, left: 20.0, right: 20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          children: [
-                            Text('9876543210'),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text('DAILY'),
-                                SizedBox(
-                                  width: size.width * 0.06,
-                                ),
-                                Text('100/-')
-                              ],
-                            )
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Row(
-                              children: [
-                                Text('DOO'),
-                                SizedBox(
-                                  width: size.width * 0.03,
-                                ),
-                                Text('10/06/23')
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text('DOM'),
-                                SizedBox(
-                                  width: size.width * 0.03,
-                                ),
-                                Text('10/06/27')
-                              ],
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            RawMaterialButton(
-                              padding: EdgeInsets.all(8.0),
-                              constraints: BoxConstraints(minWidth: 20),
-                              onPressed: () {},
-                              child: Icon(Icons.request_page),
-                              elevation: 2.0,
-                              fillColor: Colors.green,
-                              shape: CircleBorder(),
-                            ),
-                            RawMaterialButton(
-                              padding: EdgeInsets.all(8.0),
-                              constraints: BoxConstraints(minWidth: 20),
-                              onPressed: () {},
-                              child: Icon(Icons.request_page),
-                              elevation: 2.0,
-                              fillColor: Colors.white,
-                              shape: CircleBorder(),
-                            ),
-                            RawMaterialButton(
-                              padding: EdgeInsets.all(8.0),
-                              constraints: BoxConstraints(minWidth: 20),
-                              onPressed: () {},
-                              child: Icon(Icons.request_page),
-                              elevation: 2.0,
-                              fillColor: Colors.white,
-                              shape: CircleBorder(),
-                            ),
-                            RawMaterialButton(
-                              padding: EdgeInsets.all(8.0),
-                              constraints: BoxConstraints(minWidth: 20),
-                              onPressed: () {},
-                              child: Icon(Icons.request_page),
-                              elevation: 2.0,
-                              fillColor: Colors.white,
-                              shape: CircleBorder(),
-                            ),
-                            RawMaterialButton(
-                              padding: EdgeInsets.all(8.0),
-                              constraints: BoxConstraints(minWidth: 20),
-                              onPressed: () {},
-                              child: Icon(Icons.request_page),
-                              elevation: 2.0,
-                              fillColor: Colors.white,
-                              shape: CircleBorder(),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Divider(
-                    thickness: 0.7,
-                    height: 0.02,
-                  )
-                ],
-              ),
-            )),
-          ),
+          displayeddata(size: size),
         ],
       ),
       bottomNavigationBar: _buildBottomBar(),
@@ -299,3 +147,5 @@ class _acc_masterState extends State<acc_master> {
     );
   }
 }
+
+

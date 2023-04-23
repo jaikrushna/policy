@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class CustomAnimatedAboveBar extends StatelessWidget {
-  CustomAnimatedAboveBar({
+  const CustomAnimatedAboveBar({
     Key? key,
     this.selectedIndex = 0,
     this.showElevation = true,

@@ -1,5 +1,6 @@
 import 'package:internship2/Providers/custom_animated_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:internship2/Screens/newmember.dart';
 
 class user extends StatefulWidget {
   const user({Key? key}) : super(key: key);
@@ -232,7 +233,12 @@ class _userState extends State<user> {
       floatingActionButton: Container(
         width: size.width * 0.45,
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const newmem()),
+            );
+          },
           child: Text(
             'Add Member',
             style: TextStyle(
