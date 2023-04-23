@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:internship2/Screens/usersearch.dart';
 
 class placeedit extends StatefulWidget {
   const placeedit({Key? key}) : super(key: key);
@@ -14,9 +15,14 @@ class _placeeditState extends State<placeedit> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: Icon(
-          Icons.arrow_back_ios_new_outlined,
-          color: Color(0xff144743),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios_new_outlined,
+            color: Color(0xff144743),
+          ),
         ),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -29,7 +35,12 @@ class _placeeditState extends State<placeedit> {
             ),
             IconButton(
                 iconSize: 50,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const user()),
+            );
+                },
                 // height: size.height * 0.09,
                 // width: size.width * 0.09,
                 icon: Image.asset('assets/app_pen.png'))
