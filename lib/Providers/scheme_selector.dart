@@ -42,16 +42,16 @@ class CustomAnimatedAboveBar extends StatelessWidget {
         border: Border.all(
           width: 3,
           color: Colors.white,
-          style: BorderStyle.solid,
+          // style: BorderStyle.solid,
         ),
-        color: bgColor,
-        boxShadow: [
-          if (showElevation)
-            const BoxShadow(
-              color: Colors.black12,
-              blurRadius: 2,
-            ),
-        ],
+        color: Colors.white,
+        // boxShadow: [
+        //   if (showElevation)
+        //     const BoxShadow(
+        //       color: Colors.black12,
+        //       blurRadius: 2,
+        //     ),
+        // ],
       ),
       child: SafeArea(
         child: Container(

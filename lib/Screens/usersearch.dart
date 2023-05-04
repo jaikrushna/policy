@@ -16,6 +16,7 @@ class _userState extends State<user> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        foregroundColor: Colors.black,
         backgroundColor: Colors.white,
         title: Container(
           width: double.infinity,

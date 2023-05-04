@@ -5,6 +5,7 @@ import 'package:internship2/Providers/custom_animated_bottom_bar.dart';
 import '../../models/views/displayed_data.dart';
 
 class acc_master extends StatefulWidget {
+  static const routename = '/acc_master';
   @override
   State<acc_master> createState() => _acc_masterState();
 }
@@ -70,6 +71,48 @@ class _acc_masterState extends State<acc_master> {
               child: _buildAboveBar(),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(left: 12.0),
+            child: Row(
+              children: [
+                Text(
+                  'Chiran Road',
+                  style: TextStyle(
+                    fontSize: 13.5,
+                    color: Color(0xff205955),
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+                // Text(
+                //   'Chiran Road',
+                //   textAlign: TextAlign.left,
+                // ),
+              ],
+            ),
+          ),
+          displayeddata(size: size),
+          displayeddata(size: size),
+          Padding(
+            padding: const EdgeInsets.only(left: 12.0),
+            child: Row(
+              children: [
+                Text(
+                  'Rewa Road',
+                  style: TextStyle(
+                    fontSize: 13.5,
+                    color: Color(0xff205955),
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+                // Text(
+                //   'Chiran Road',
+                //   textAlign: TextAlign.left,
+                // ),
+              ],
+            ),
+          ),
           displayeddata(size: size),
         ],
       ),
@@ -80,6 +123,7 @@ class _acc_masterState extends State<acc_master> {
   Widget _buildBottomBar() {
     Size size = MediaQuery.of(context).size;
     return CustomAnimatedBottomBar(
+      rute: '/acc_master',
       containerHeight: size.height * 0.09,
       backgroundColor: Colors.white,
       selectedIndex: _currentscheme,
@@ -147,5 +191,3 @@ class _acc_masterState extends State<acc_master> {
     );
   }
 }
-
-

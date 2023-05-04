@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "392108930836",
+    "project_id": "licapp-d60e6",
+    "storage_bucket": "licapp-d60e6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:392108930836:android:b298b2e162534aa1def401",
+        "android_client_info": {
+          "package_name": "com.example.internship2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "392108930836-1aftcddqf5l4ouoj5vfga60k3ejd2pfn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpMEmtYfQGIB5W3ppNj1gZDQU-0fC_xU4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "392108930836-1aftcddqf5l4ouoj5vfga60k3ejd2pfn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -4,6 +4,7 @@ import 'package:internship2/Screens/place_edit.dart';
 
 class place extends StatefulWidget {
   const place({Key? key}) : super(key: key);
+  static const routename = '/place';
 
   @override
   State<place> createState() => _placeState();
@@ -229,6 +230,7 @@ class _placeState extends State<place> {
 
   Widget _buildBottomBar() {
     return CustomAnimatedBottomBar(
+      rute: '/place',
       containerHeight: 70,
       backgroundColor: Colors.white,
       selectedIndex: _currentIndex,
