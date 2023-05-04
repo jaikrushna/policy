@@ -25,11 +25,12 @@ class MyApp extends StatelessWidget {
                 theme: ThemeData(
                   primarySwatch: Colors.blue,
                 ),
-                initialRoute: newmem.id,
+                initialRoute: user.id,
                 routes: {
                   place.routename: (ctx) => place(),
                   acc_master.routename: (ctx) => acc_master(),
                   newmem.id: (ctx) => newmem(),
+                  user.id: (ctx) => user(),
                 }));
   }
 }

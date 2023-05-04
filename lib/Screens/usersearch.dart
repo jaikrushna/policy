@@ -1,15 +1,21 @@
 import 'package:internship2/Providers/custom_animated_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:internship2/Screens/newmember.dart';
+import 'package:internship2/models/User_Tile/user_tile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class user extends StatefulWidget {
   const user({Key? key}) : super(key: key);
-
+  static const id = 'user';
   @override
   State<user> createState() => _userState();
 }
 
 class _userState extends State<user> {
+  late String Username;
+  late String User_Amt;
+  final _firestone = FirebaseFirestore.instance;
+  var _isloading = false;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -41,194 +47,228 @@ class _userState extends State<user> {
           SizedBox(
             height: size.height * 0.005,
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListTile(
-              selected: true,
-              focusColor: Color(0xff53927B),
-              tileColor: Colors.white,
-              selectedTileColor: Color(0xff53927B),
-              leading: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                height: size.height * 0.1,
-                width: size.width * 0.14,
-                child: Center(
-                  child: Text(
-                    'A',
-                    style: TextStyle(
-                        color: Color(0xff29756F),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
-                  ),
-                ),
-              ),
-              trailing: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.expand_circle_down_rounded,
-                    color: Colors.white,
-                  )),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              title: Text(
-                'Ashish Jain',
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
-              subtitle: Text(
-                '6000/Month',
-                style: TextStyle(color: Colors.grey),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListTile(
-              selected: false,
-              focusColor: Color(0xff53927B),
-              tileColor: Colors.white,
-              selectedTileColor: Color(0xff53927B),
-              leading: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                height: size.height * 0.1,
-                width: size.width * 0.14,
-                child: Center(
-                  child: Text(
-                    'C',
-                    style: TextStyle(
-                        color: Color(0xff29756F),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
-                  ),
-                ),
-              ),
-              trailing: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.expand_circle_down_rounded,
-                    color: Colors.white,
-                  )),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              title: Text(
-                'Chetan Bhagat',
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
-              subtitle: Text(
-                '6000/Month',
-                style: TextStyle(color: Colors.grey),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListTile(
-              selected: false,
-              focusColor: Color(0xff53927B),
-              tileColor: Colors.white,
-              selectedTileColor: Color(0xff53927B),
-              leading: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                height: size.height * 0.1,
-                width: size.width * 0.14,
-                child: Center(
-                  child: Text(
-                    'A',
-                    style: TextStyle(
-                        color: Color(0xff29756F),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
-                  ),
-                ),
-              ),
-              trailing: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.expand_circle_down_rounded,
-                    color: Colors.white,
-                  )),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              title: Text(
-                'Ashish Jain',
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
-              subtitle: Text(
-                '6000/Month',
-                style: TextStyle(color: Colors.grey),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListTile(
-              selected: false,
-              focusColor: Color(0xff53927B),
-              tileColor: Colors.white,
-              selectedTileColor: Color(0xff53927B),
-              leading: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                height: size.height * 0.1,
-                width: size.width * 0.14,
-                child: Center(
-                  child: Text(
-                    'A',
-                    style: TextStyle(
-                        color: Color(0xff29756F),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
-                  ),
-                ),
-              ),
-              trailing: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.expand_circle_down_rounded,
-                    color: Colors.white,
-                  )),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              title: Text(
-                'Ashish Jain',
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
-              subtitle: Text(
-                '6000/Month',
-                style: TextStyle(color: Colors.grey),
-              ),
-            ),
-          ),
+          StreamBuilder(
+              stream: _firestone
+                  .collection('new_account')
+                  .orderBy('Member_Name')
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      backgroundColor: Colors.lightBlueAccent,
+                    ),
+                  );
+                }
+                final tiles = snapshot.data!.docs;
+                List<Widget> Memberlist = [];
+                for (var tile in tiles) {
+                  Username = tile.get('Member_Name');
+                  User_Amt = tile.get('Amount_Remaining');
+                  Memberlist.add(user_tile(Username, User_Amt));
+                }
+                return _isloading
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : ListView.builder(
+                        itemBuilder: (context, i) => Memberlist[i],
+                      );
+                // ;
+                // return Flexible(
+                //   child: ListView.builder(
+                //     itemBuilder: (context, i) => Memberlist[i],
+                //   ),
+                // );
+              })
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: ListTile(
+          //     selected: true,
+          //     focusColor: Color(0xff53927B),
+          //     tileColor: Colors.white,
+          //     selectedTileColor: Color(0xff53927B),
+          //     leading: Container(
+          //       decoration: BoxDecoration(
+          //         color: Colors.white,
+          //         borderRadius: BorderRadius.all(
+          //           Radius.circular(10),
+          //         ),
+          //       ),
+          //       height: size.height * 0.1,
+          //       width: size.width * 0.14,
+          //       child: Center(
+          //         child: Text(
+          //           'A',
+          //           style: TextStyle(
+          //               color: Color(0xff29756F),
+          //               fontWeight: FontWeight.bold,
+          //               fontSize: 20),
+          //         ),
+          //       ),
+          //     ),
+          //     trailing: IconButton(
+          //         onPressed: () {},
+          //         icon: Icon(
+          //           Icons.expand_circle_down_rounded,
+          //           color: Colors.white,
+          //         )),
+          //     shape: RoundedRectangleBorder(
+          //       borderRadius: BorderRadius.circular(15),
+          //     ),
+          //     title: Text(
+          //       'Ashish Jain',
+          //       style: TextStyle(
+          //         color: Colors.black,
+          //       ),
+          //     ),
+          //     subtitle: Text(
+          //       '6000/Month',
+          //       style: TextStyle(color: Colors.grey),
+          //     ),
+          //   ),
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: ListTile(
+          //     selected: false,
+          //     focusColor: Color(0xff53927B),
+          //     tileColor: Colors.white,
+          //     selectedTileColor: Color(0xff53927B),
+          //     leading: Container(
+          //       decoration: BoxDecoration(
+          //         color: Colors.white,
+          //         borderRadius: BorderRadius.all(
+          //           Radius.circular(10),
+          //         ),
+          //       ),
+          //       height: size.height * 0.1,
+          //       width: size.width * 0.14,
+          //       child: Center(
+          //         child: Text(
+          //           'C',
+          //           style: TextStyle(
+          //               color: Color(0xff29756F),
+          //               fontWeight: FontWeight.bold,
+          //               fontSize: 20),
+          //         ),
+          //       ),
+          //     ),
+          //     trailing: IconButton(
+          //         onPressed: () {},
+          //         icon: Icon(
+          //           Icons.expand_circle_down_rounded,
+          //           color: Colors.white,
+          //         )),
+          //     shape: RoundedRectangleBorder(
+          //       borderRadius: BorderRadius.circular(15),
+          //     ),
+          //     title: Text(
+          //       'Chetan Bhagat',
+          //       style: TextStyle(
+          //         color: Colors.black,
+          //       ),
+          //     ),
+          //     subtitle: Text(
+          //       '6000/Month',
+          //       style: TextStyle(color: Colors.grey),
+          //     ),
+          //   ),
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: ListTile(
+          //     selected: false,
+          //     focusColor: Color(0xff53927B),
+          //     tileColor: Colors.white,
+          //     selectedTileColor: Color(0xff53927B),
+          //     leading: Container(
+          //       decoration: BoxDecoration(
+          //         color: Colors.white,
+          //         borderRadius: BorderRadius.all(
+          //           Radius.circular(10),
+          //         ),
+          //       ),
+          //       height: size.height * 0.1,
+          //       width: size.width * 0.14,
+          //       child: Center(
+          //         child: Text(
+          //           'A',
+          //           style: TextStyle(
+          //               color: Color(0xff29756F),
+          //               fontWeight: FontWeight.bold,
+          //               fontSize: 20),
+          //         ),
+          //       ),
+          //     ),
+          //     trailing: IconButton(
+          //         onPressed: () {},
+          //         icon: Icon(
+          //           Icons.expand_circle_down_rounded,
+          //           color: Colors.white,
+          //         )),
+          //     shape: RoundedRectangleBorder(
+          //       borderRadius: BorderRadius.circular(15),
+          //     ),
+          //     title: Text(
+          //       'Ashish Jain',
+          //       style: TextStyle(
+          //         color: Colors.black,
+          //       ),
+          //     ),
+          //     subtitle: Text(
+          //       '6000/Month',
+          //       style: TextStyle(color: Colors.grey),
+          //     ),
+          //   ),
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: ListTile(
+          //     selected: false,
+          //     focusColor: Color(0xff53927B),
+          //     tileColor: Colors.white,
+          //     selectedTileColor: Color(0xff53927B),
+          //     leading: Container(
+          //       decoration: BoxDecoration(
+          //         color: Colors.white,
+          //         borderRadius: BorderRadius.all(
+          //           Radius.circular(10),
+          //         ),
+          //       ),
+          //       height: size.height * 0.1,
+          //       width: size.width * 0.14,
+          //       child: Center(
+          //         child: Text(
+          //           'A',
+          //           style: TextStyle(
+          //               color: Color(0xff29756F),
+          //               fontWeight: FontWeight.bold,
+          //               fontSize: 20),
+          //         ),
+          //       ),
+          //     ),
+          //     trailing: IconButton(
+          //         onPressed: () {},
+          //         icon: Icon(
+          //           Icons.expand_circle_down_rounded,
+          //           color: Colors.white,
+          //         )),
+          //     shape: RoundedRectangleBorder(
+          //       borderRadius: BorderRadius.circular(15),
+          //     ),
+          //     title: Text(
+          //       'Ashish Jain',
+          //       style: TextStyle(
+          //         color: Colors.black,
+          //       ),
+          //     ),
+          //     subtitle: Text(
+          //       '6000/Month',
+          //       style: TextStyle(color: Colors.grey),
+          //     ),
+          //   ),
+          // ),
         ]),
       ),
       floatingActionButton: Container(
