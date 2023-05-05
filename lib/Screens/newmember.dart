@@ -12,12 +12,12 @@ class newmem extends StatefulWidget {
 
 class _newmemState extends State<newmem> {
   late String Member_Name;
-  late String Plan;
-  late int Account_No;
+  String Plan = 'B';
+  late double Account_No;
   late String Address;
   late String Amount_Collected;
   late String Amount_Remaining;
-  late int Phone_No;
+  late double Phone_No;
   late String Type;
 
   String dropdownvalue = 'Monthly';
@@ -226,7 +226,7 @@ class _newmemState extends State<newmem> {
                                     ),
                                     textAlign: TextAlign.left,
                                     onChanged: (value) {
-                                      Account_No = int.parse(value);
+                                      Account_No = double.parse(value);
                                     },
                                     decoration: InputDecoration(
                                         hintText: 'Account No')),
@@ -467,7 +467,7 @@ class _newmemState extends State<newmem> {
                                     ),
                                     textAlign: TextAlign.left,
                                     onChanged: (value) {
-                                      Phone_No = int.parse(value);
+                                      Phone_No = double.parse(value);
                                     },
                                     decoration:
                                         InputDecoration(hintText: 'Phone No')),
@@ -500,6 +500,9 @@ class _newmemState extends State<newmem> {
                             'Type': Type,
                             'Date_of_Maturity': date_mature,
                             'Date_of_Opening': date_open,
+                          });
+                          setState(() {
+                            Navigator.of(context).pop();
                           });
                         },
                         child: Center(

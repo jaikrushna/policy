@@ -25,8 +25,9 @@ class MyApp extends StatelessWidget {
                 theme: ThemeData(
                   primarySwatch: Colors.blue,
                 ),
-                initialRoute: user.id,
+                initialRoute: place.routename,
                 routes: {
+                  placeedit.id1: (ctx) => placeedit(),
                   place.routename: (ctx) => place(),
                   acc_master.routename: (ctx) => acc_master(),
                   newmem.id: (ctx) => newmem(),

@@ -15,26 +15,6 @@ class displayeddata extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          // Padding(
-          //   padding: const EdgeInsets.only(left: 12.0),
-          //   child: Row(
-          //     children: [
-          //       Text(
-          //         'Chiran Road',
-          //         style: TextStyle(
-          //           fontSize: 13.5,
-          //           color: Color(0xff205955),
-          //           fontWeight: FontWeight.w500,
-          //         ),
-          //         textAlign: TextAlign.left,
-          //       ),
-          //       // Text(
-          //       //   'Chiran Road',
-          //       //   textAlign: TextAlign.left,
-          //       // ),
-          //     ],
-          //   ),
-          // ),
           Padding(
             padding: const EdgeInsets.only(
                 top: 10, bottom: 10.0, left: 20.0, right: 20.0),

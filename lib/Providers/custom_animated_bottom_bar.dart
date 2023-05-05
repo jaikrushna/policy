@@ -118,26 +118,31 @@ class _ItemWidget extends StatelessWidget {
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           physics: NeverScrollableScrollPhysics(),
-          child: Container(
-            width: 70,
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                IconTheme(
-                  data: IconThemeData(
-                    size: iconSize,
-                    color: isSelected
-                        ? item.activeColor.withOpacity(1)
-                        : item.inactiveColor == null
-                            ? item.activeColor
-                            : item.inactiveColor,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushNamed('${item.route}');
+            },
+            child: Container(
+              width: 70,
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  IconTheme(
+                    data: IconThemeData(
+                      size: iconSize,
+                      color: isSelected
+                          ? item.activeColor.withOpacity(1)
+                          : item.inactiveColor == null
+                              ? item.activeColor
+                              : item.inactiveColor,
+                    ),
+                    child: item.icon,
                   ),
-                  child: item.icon,
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -148,11 +153,12 @@ class _ItemWidget extends StatelessWidget {
 
 class BottomNavyBarItem {
   BottomNavyBarItem({
+    required this.route,
     required this.icon,
     this.activeColor = Colors.blue,
     this.inactiveColor,
   });
-
+  final String route;
   final Widget icon;
   final Color activeColor;
   final Color? inactiveColor;
