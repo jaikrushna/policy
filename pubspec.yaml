@@ -89,6 +89,7 @@ flutter:
      - assets/Acc/IC3.png
      - assets/Acc/IC4.png
      - assets/Acc/IC5.png
+     - assets/menu/acc_master.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

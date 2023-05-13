@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class user extends StatefulWidget {
   const user({Key? key}) : super(key: key);
-  static const id = 'user';
+  static const id = '/user';
   @override
   State<user> createState() => _userState();
 }
