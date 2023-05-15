@@ -3,7 +3,7 @@ import 'package:internship2/Screens/usersearch.dart';
 
 class placeedit extends StatefulWidget {
   const placeedit({Key? key}) : super(key: key);
-
+  static const id1 = '/placeedit';
   @override
   State<placeedit> createState() => _placeeditState();
 }
@@ -37,9 +37,9 @@ class _placeeditState extends State<placeedit> {
                 iconSize: 50,
                 onPressed: () {
                   Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const user()),
-            );
+                    context,
+                    MaterialPageRoute(builder: (context) => const user()),
+                  );
                 },
                 // height: size.height * 0.09,
                 // width: size.width * 0.09,

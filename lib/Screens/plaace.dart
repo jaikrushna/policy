@@ -1,9 +1,11 @@
 import 'package:internship2/Providers/custom_animated_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:internship2/Screens/place_edit.dart';
+import 'package:internship2/Providers/_buildBottomBar.dart';
 
 class place extends StatefulWidget {
   const place({Key? key}) : super(key: key);
+  static const routename = '/place';
 
   @override
   State<place> createState() => _placeState();
@@ -223,46 +225,48 @@ class _placeState extends State<place> {
           ),
         ),
       ),
-      bottomNavigationBar: _buildBottomBar(),
+      bottomNavigationBar: buildBottomBar(),
     );
   }
 
-  Widget _buildBottomBar() {
-    return CustomAnimatedBottomBar(
-      containerHeight: 70,
-      backgroundColor: Colors.white,
-      selectedIndex: _currentIndex,
-      showElevation: true,
-      itemCornerRadius: 24,
-      curve: Curves.easeIn,
-      onItemSelected: (index) => setState(() => _currentIndex = index),
-      items: <BottomNavyBarItem>[
-        BottomNavyBarItem(
-          icon: Icon(Icons.account_circle_rounded),
-          activeColor: Color(0xff32B9AE),
-          inactiveColor: _inactiveColor,
-        ),
-        BottomNavyBarItem(
-          icon: Icon(Icons.search_rounded),
-          activeColor: Color(0xff32B9AE),
-          inactiveColor: _inactiveColor,
-        ),
-        BottomNavyBarItem(
-          icon: Icon(Icons.home_filled),
-          activeColor: Color(0xff32B9AE),
-          inactiveColor: _inactiveColor,
-        ),
-        BottomNavyBarItem(
-          icon: Icon(Icons.event_note_sharp),
-          activeColor: Color(0xff32B9AE),
-          inactiveColor: _inactiveColor,
-        ),
-        BottomNavyBarItem(
-          icon: Icon(Icons.account_balance),
-          activeColor: Color(0xff32B9AE),
-          inactiveColor: _inactiveColor,
-        ),
-      ],
-    );
-  }
+  // Widget _buildBottomBar() {
+  //   return CustomAnimatedBottomBar(
+  //     rute: '/place',
+  //     containerHeight: 70,
+  //     backgroundColor: Colors.white,
+  //     selectedIndex: _currentIndex,
+  //     showElevation: true,
+  //     itemCornerRadius: 24,
+  //     curve: Curves.easeIn,
+  //     onItemSelected: (index) => setState(() => _currentIndex = index),
+  //     items: <BottomNavyBarItem>[
+  //       BottomNavyBarItem(
+  //         icon: Icon(Icons.account_circle_rounded),
+  //         activeColor: Color(0xff32B9AE),
+  //         inactiveColor: _inactiveColor,
+  //         route:
+  //       ),
+  //       BottomNavyBarItem(
+  //         icon: Icon(Icons.search_rounded),
+  //         activeColor: Color(0xff32B9AE),
+  //         inactiveColor: _inactiveColor,
+  //       ),
+  //       BottomNavyBarItem(
+  //         icon: Icon(Icons.home_filled),
+  //         activeColor: Color(0xff32B9AE),
+  //         inactiveColor: _inactiveColor,
+  //       ),
+  //       BottomNavyBarItem(
+  //         icon: Icon(Icons.event_note_sharp),
+  //         activeColor: Color(0xff32B9AE),
+  //         inactiveColor: _inactiveColor,
+  //       ),
+  //       BottomNavyBarItem(
+  //         icon: Icon(Icons.account_balance),
+  //         activeColor: Color(0xff32B9AE),
+  //         inactiveColor: _inactiveColor,
+  //       ),
+  //     ],
+  //   );
+  // }
 }

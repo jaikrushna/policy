@@ -16,38 +16,42 @@ class displayeddata extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: Row(
-              children: [
-                Text(
-                  'Chiran Road',
-                  textAlign: TextAlign.left,
-                ),
-              ],
-            ),
-          ),
-          Padding(
             padding: const EdgeInsets.only(
                 top: 10, bottom: 10.0, left: 20.0, right: 20.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Ashish Jain'),
+                Text(
+                  'Ashish Jain',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 15,
+                  ),
+                ),
                 Container(
+                  width: size.width * 0.3,
                   decoration: BoxDecoration(
-                    color: Colors.green,
+                    color: Color(0xff29756F),
                     borderRadius: BorderRadius.all(
                       Radius.circular(40),
                     ),
                     border: Border.all(
                       width: 2,
-                      color: Colors.green,
+                      color: Color(0xff29756F),
                       style: BorderStyle.solid,
                     ),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(4.0),
-                    child: Text('May 2007'),
+                    child: Center(
+                      child: Text(
+                        'May 2007',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                   ),
                 )
               ],
@@ -61,11 +65,23 @@ class displayeddata extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    Text('9876543210'),
+                    Text(
+                      '9876543210',
+                      style:
+                          TextStyle(color: Color(0xffAF545F), fontSize: 16.0),
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('DAILY'),
+                        Text(
+                          'DAILY',
+                          style: TextStyle(
+                            fontSize: 13.5,
+                            color: Color(0xffAF545F),
+                            fontWeight: FontWeight.w500,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
                         SizedBox(
                           width: size.width * 0.06,
                         ),
@@ -78,7 +94,15 @@ class displayeddata extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text('DOO'),
+                        Text(
+                          'DOO',
+                          style: TextStyle(
+                            fontSize: 13.5,
+                            color: Color(0xffAF545F),
+                            fontWeight: FontWeight.w500,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
                         SizedBox(
                           width: size.width * 0.03,
                         ),
@@ -87,7 +111,15 @@ class displayeddata extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Text('DOM'),
+                        Text(
+                          'DOM',
+                          style: TextStyle(
+                            fontSize: 13.5,
+                            color: Color(0xffAF545F),
+                            fontWeight: FontWeight.w500,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
                         SizedBox(
                           width: size.width * 0.03,
                         ),
@@ -110,25 +142,16 @@ class displayeddata extends StatelessWidget {
                       padding: EdgeInsets.all(8.0),
                       constraints: BoxConstraints(minWidth: 20),
                       onPressed: () {},
-                      child: Icon(Icons.request_page),
+                      child: Image.asset('assets/Acc/IC1.png'),
                       elevation: 2.0,
-                      fillColor: Colors.green,
+                      fillColor: Color(0xff29756F),
                       shape: CircleBorder(),
                     ),
                     RawMaterialButton(
                       padding: EdgeInsets.all(8.0),
                       constraints: BoxConstraints(minWidth: 20),
                       onPressed: () {},
-                      child: Icon(Icons.request_page),
-                      elevation: 2.0,
-                      fillColor: Colors.white,
-                      shape: CircleBorder(),
-                    ),
-                    RawMaterialButton(
-                      padding: EdgeInsets.all(8.0),
-                      constraints: BoxConstraints(minWidth: 20),
-                      onPressed: () {},
-                      child: Icon(Icons.request_page),
+                      child: Image.asset('assets/Acc/IC2.png'),
                       elevation: 2.0,
                       fillColor: Colors.white,
                       shape: CircleBorder(),
@@ -137,7 +160,7 @@ class displayeddata extends StatelessWidget {
                       padding: EdgeInsets.all(8.0),
                       constraints: BoxConstraints(minWidth: 20),
                       onPressed: () {},
-                      child: Icon(Icons.request_page),
+                      child: Image.asset('assets/Acc/IC3.png'),
                       elevation: 2.0,
                       fillColor: Colors.white,
                       shape: CircleBorder(),
@@ -146,7 +169,16 @@ class displayeddata extends StatelessWidget {
                       padding: EdgeInsets.all(8.0),
                       constraints: BoxConstraints(minWidth: 20),
                       onPressed: () {},
-                      child: Icon(Icons.request_page),
+                      child: Image.asset('assets/Acc/IC4.png'),
+                      elevation: 2.0,
+                      fillColor: Colors.white,
+                      shape: CircleBorder(),
+                    ),
+                    RawMaterialButton(
+                      padding: EdgeInsets.all(8.0),
+                      constraints: BoxConstraints(minWidth: 20),
+                      onPressed: () {},
+                      child: Image.asset('assets/Acc/IC5.png'),
                       elevation: 2.0,
                       fillColor: Colors.white,
                       shape: CircleBorder(),
