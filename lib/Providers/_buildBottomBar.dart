@@ -37,7 +37,7 @@ class buildBottomBarState extends State<buildBottomBar> {
             icon: Icon(Icons.search_rounded),
             activeColor: Color(0xff32B9AE),
             inactiveColor: _inactiveColor,
-            route: '/acc_master'),
+            route: '/menu'),
         BottomNavyBarItem(
             icon: Icon(Icons.home_filled),
             activeColor: Color(0xff32B9AE),

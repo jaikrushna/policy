@@ -27,13 +27,13 @@ class MyApp extends StatelessWidget {
                 theme: ThemeData(
                   primarySwatch: Colors.blue,
                 ),
-                initialRoute: due.id,
+                initialRoute: menu.id,
                 routes: {
                   due.id: (ctx) => due(),
                   menu.id: (ctx) => menu(),
                   placeedit.id1: (ctx) => placeedit(),
-                  place.routename: (ctx) => place(),
-                  acc_master.routename: (ctx) => acc_master(),
+                  place.id: (ctx) => place(),
+                  acc_master.id: (ctx) => acc_master(),
                   newmem.id: (ctx) => newmem(),
                   user.id: (ctx) => user(),
                 }));

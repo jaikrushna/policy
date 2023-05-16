@@ -5,7 +5,7 @@ import 'package:internship2/Providers/_buildBottomBar.dart';
 import '../../models/views/displayed_data.dart';
 
 class acc_master extends StatefulWidget {
-  static const routename = '/acc_master';
+  static const id = '/acc_master';
   @override
   State<acc_master> createState() => _acc_masterState();
 }

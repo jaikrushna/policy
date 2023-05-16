@@ -5,7 +5,7 @@ import 'package:internship2/Providers/_buildBottomBar.dart';
 
 class place extends StatefulWidget {
   const place({Key? key}) : super(key: key);
-  static const routename = '/place';
+  static const id = '/place';
 
   @override
   State<place> createState() => _placeState();

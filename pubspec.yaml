@@ -90,6 +90,11 @@ flutter:
      - assets/Acc/IC4.png
      - assets/Acc/IC5.png
      - assets/menu/acc_master.png
+     - assets/menu/due_acc.png
+     - assets/menu/lapse.png
+     - assets/menu/maturity.png
+     - assets/menu/records.png
+     - assets/menu/rokar.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
