@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:internship2/widgets/button.dart';
+import 'package:internship2/widgets/bottom_circular_button.dart';
 
 class due_data extends StatefulWidget {
   const due_data({
@@ -45,31 +47,10 @@ class _due_dataState extends State<due_data> {
                     ),
                   ],
                 ),
-                Container(
-                  width: widget.size.width * 0.3,
-                  decoration: BoxDecoration(
-                    color: Color(0xffD83F52),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(40),
-                    ),
-                    border: Border.all(
-                      width: 2,
-                      color: Color(0xffD83F52),
-                      style: BorderStyle.solid,
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Center(
-                      child: Text(
-                        'Due',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                )
+                button(
+                    size: widget.size.width * 0.3,
+                    text: 'Due',
+                    color: Color(0xffD83F52))
               ],
             ),
           ),
@@ -155,50 +136,25 @@ class _due_dataState extends State<due_data> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    RawMaterialButton(
-                      padding: EdgeInsets.all(8.0),
-                      constraints: BoxConstraints(minWidth: 20),
-                      onPressed: () {},
-                      child: Image.asset('assets/Acc/IC1.png'),
-                      elevation: 2.0,
-                      fillColor: Color(0xff29756F),
-                      shape: CircleBorder(),
+                    circular_button(
+                      size: 20,
+                      icon: Image.asset('assets/Acc/IC1.png'),
                     ),
-                    RawMaterialButton(
-                      padding: EdgeInsets.all(8.0),
-                      constraints: BoxConstraints(minWidth: 20),
-                      onPressed: () {},
-                      child: Image.asset('assets/Acc/IC2.png'),
-                      elevation: 2.0,
-                      fillColor: Colors.white,
-                      shape: CircleBorder(),
+                    circular_button(
+                      size: 20,
+                      icon: Image.asset('assets/Acc/IC2.png'),
                     ),
-                    RawMaterialButton(
-                      padding: EdgeInsets.all(8.0),
-                      constraints: BoxConstraints(minWidth: 20),
-                      onPressed: () {},
-                      child: Image.asset('assets/Acc/IC3.png'),
-                      elevation: 2.0,
-                      fillColor: Colors.white,
-                      shape: CircleBorder(),
+                    circular_button(
+                      size: 20,
+                      icon: Image.asset('assets/Acc/IC3.png'),
                     ),
-                    RawMaterialButton(
-                      padding: EdgeInsets.all(8.0),
-                      constraints: BoxConstraints(minWidth: 20),
-                      onPressed: () {},
-                      child: Image.asset('assets/Acc/IC4.png'),
-                      elevation: 2.0,
-                      fillColor: Colors.white,
-                      shape: CircleBorder(),
+                    circular_button(
+                      size: 20,
+                      icon: Image.asset('assets/Acc/IC4.png'),
                     ),
-                    RawMaterialButton(
-                      padding: EdgeInsets.all(8.0),
-                      constraints: BoxConstraints(minWidth: 20),
-                      onPressed: () {},
-                      child: Image.asset('assets/Acc/IC5.png'),
-                      elevation: 2.0,
-                      fillColor: Colors.white,
-                      shape: CircleBorder(),
+                    circular_button(
+                      size: 20,
+                      icon: Image.asset('assets/Acc/IC5.png'),
                     ),
                   ],
                 ),
