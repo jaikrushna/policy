@@ -3,8 +3,8 @@ import 'package:internship2/widgets/button.dart';
 import 'package:internship2/widgets/bottom_circular_button.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
-class due_data extends StatefulWidget {
-  const due_data({
+class lapse_data extends StatefulWidget {
+  const lapse_data({
     super.key,
     required this.size,
   });
@@ -12,10 +12,10 @@ class due_data extends StatefulWidget {
   final Size size;
 
   @override
-  State<due_data> createState() => _due_dataState();
+  State<lapse_data> createState() => _lapse_dataState();
 }
 
-class _due_dataState extends State<due_data> {
+class _lapse_dataState extends State<lapse_data> {
   String _toggleValue2 = 'cash';
   bool _toggleValue1 = false;
 
@@ -105,85 +105,85 @@ class _due_dataState extends State<due_data> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'CASH',
-                                style: TextStyle(fontSize: 10),
-                              ),
-                              SizedBox(width: 5),
-                              FlutterSwitch(
-                                activeColor: Color(0xff1E8829),
-                                inactiveColor: Color(0xff1E8829),
-                                width: size.width * 0.07,
-                                height: size.height * 0.018,
-                                valueFontSize: size.height * 0.018,
-                                toggleSize: size.height * 0.018,
-                                value: _toggleValue1,
-                                borderRadius: 30.0,
-                                // padding: 8.0,
-                                showOnOff: false,
-                                onToggle: (val) {
-                                  setState(() {
-                                    if (val == true) {
-                                      _toggleValue2 = 'cash';
-                                      _toggleValue1 = val;
-                                    } else {
-                                      _toggleValue2 = 'online';
-                                      _toggleValue1 = val;
-                                    }
-                                  });
-                                },
-                              ),
-                              SizedBox(width: 5),
-                              Text(
-                                'ONLINE',
-                                style: TextStyle(fontSize: 10),
-                              ),
-                            ],
-                          ),
-                        ),
+                        // Center(
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.center,
+                        //     children: [
+                        //       Text(
+                        //         'CASH',
+                        //         style: TextStyle(fontSize: 10),
+                        //       ),
+                        //       SizedBox(width: 5),
+                        //       FlutterSwitch(
+                        //         activeColor: Color(0xff1E8829),
+                        //         inactiveColor: Color(0xff1E8829),
+                        //         width: size.width * 0.07,
+                        //         height: size.height * 0.018,
+                        //         valueFontSize: size.height * 0.018,
+                        //         toggleSize: size.height * 0.018,
+                        //         value: _toggleValue1,
+                        //         borderRadius: 30.0,
+                        //         // padding: 8.0,
+                        //         showOnOff: false,
+                        //         onToggle: (val) {
+                        //           setState(() {
+                        //             if (val == true) {
+                        //               _toggleValue2 = 'cash';
+                        //               _toggleValue1 = val;
+                        //             } else {
+                        //               _toggleValue2 = 'online';
+                        //               _toggleValue1 = val;
+                        //             }
+                        //           });
+                        //         },
+                        //       ),
+                        //       SizedBox(width: 5),
+                        //       Text(
+                        //         'ONLINE',
+                        //         style: TextStyle(fontSize: 10),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
                         SizedBox(
                           width: size.width * 0.1,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              width: size.width * 0.12,
-                              child: Text(
-                                "Balance",
-                                style: TextStyle(
-                                  color: Color(0xffaf545f),
-                                  fontSize: 11,
-                                  fontFamily: "Inter",
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: size.height * 0.03,
-                            ),
-                            Container(
-                              child: Center(
-                                child: Text(
-                                  "1300/-",
-                                  style: TextStyle(
-                                    color: Color(0xaa000000),
-                                    fontSize: 12,
-                                    fontFamily: "Inter",
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                              width: size.width * 0.15,
-                              height: size.height * 0.023,
-                              color: Color(0x35979797),
-                            )
-                          ],
-                        ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.center,
+                        //   children: [
+                        //     SizedBox(
+                        //       width: size.width * 0.12,
+                        //       child: Text(
+                        //         "Balance",
+                        //         style: TextStyle(
+                        //           color: Color(0xffaf545f),
+                        //           fontSize: 11,
+                        //           fontFamily: "Inter",
+                        //           fontWeight: FontWeight.w600,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //     SizedBox(
+                        //       height: size.height * 0.03,
+                        //     ),
+                        //     Container(
+                        //       child: Center(
+                        //         child: Text(
+                        //           "1300/-",
+                        //           style: TextStyle(
+                        //             color: Color(0xaa000000),
+                        //             fontSize: 12,
+                        //             fontFamily: "Inter",
+                        //             fontWeight: FontWeight.w500,
+                        //           ),
+                        //         ),
+                        //       ),
+                        //       width: size.width * 0.15,
+                        //       height: size.height * 0.023,
+                        //       color: Color(0x35979797),
+                        //     )
+                        //   ],
+                        // ),
                       ],
                     ),
                   ],
@@ -200,7 +200,7 @@ class _due_dataState extends State<due_data> {
                         Row(
                           children: [
                             Text(
-                              'Monthly',
+                              'Daily',
                               style: TextStyle(
                                 fontSize: 13.5,
                                 color: Color(0xffAF545F),
@@ -211,19 +211,19 @@ class _due_dataState extends State<due_data> {
                             SizedBox(
                               width: widget.size.width * 0.03,
                             ),
-                            Text('1000/-'),
+                            Text('100/-'),
                             SizedBox(
                               width: widget.size.width * 0.03,
                             ),
-                            Text(
-                              '4/12',
-                              style: TextStyle(
-                                fontSize: 13.5,
-                                color: Color(0xffAF545F),
-                                fontWeight: FontWeight.w500,
-                              ),
-                              textAlign: TextAlign.left,
-                            ),
+                            // Text(
+                            //   '4/12',
+                            //   style: TextStyle(
+                            //     fontSize: 13.5,
+                            //     color: Color(0xffAF545F),
+                            //     fontWeight: FontWeight.w500,
+                            //   ),
+                            //   textAlign: TextAlign.left,
+                            // ),
                           ],
                         ),
                       ],

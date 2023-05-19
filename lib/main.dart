@@ -8,6 +8,8 @@ import 'Screens/Account/client_dtbase.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'Screens/Menu.dart';
 import 'Screens/Due/due.dart';
+import 'Screens/Maturity/maturity.dart';
+import 'Screens/Lapse/lapse.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,6 +31,8 @@ class MyApp extends StatelessWidget {
                 ),
                 initialRoute: menu.id,
                 routes: {
+                  lapse.id: (ctx) => lapse(),
+                  maturity.id: (ctx) => maturity(),
                   due.id: (ctx) => due(),
                   menu.id: (ctx) => menu(),
                   placeedit.id1: (ctx) => placeedit(),

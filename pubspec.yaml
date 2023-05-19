@@ -40,6 +40,7 @@ dependencies:
   firebase_core: ^1.22.0
   cloud_firestore: ^3.4.7
   firebase_storage: ^10.3.8
+  flutter_switch: ^0.3.2
 
 
 #dependency_overrides:

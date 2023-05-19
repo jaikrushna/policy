@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:internship2/Screens/Account/Account_Master.dart';
 import 'package:internship2/models/views/menu_tile.dart';
 import 'package:internship2/Screens/Due/due.dart';
+import 'package:internship2/Screens/Maturity/maturity.dart';
+import 'package:internship2/Screens/Lapse/lapse.dart';
 
 class menu extends StatelessWidget {
   const menu({Key? key}) : super(key: key);
@@ -42,7 +44,7 @@ class menu extends StatelessWidget {
                 tle: 'Lapse '
                     'Account',
                 logo: Image.asset('assets/menu/lapse.png'),
-                route: '',
+                route: lapse.id,
               ),
             ],
           ),
@@ -53,7 +55,7 @@ class menu extends StatelessWidget {
                 tle: 'Maturity '
                     'Update',
                 logo: Image.asset('assets/menu/maturity.png'),
-                route: '',
+                route: maturity.id,
               ),
               menu_tile(
                 tle: 'Rokar',

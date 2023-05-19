@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:internship2/Providers/scheme_selector.dart';
+import 'package:internship2/Providers/month_selector.dart';
 import 'package:internship2/Providers/custom_animated_bottom_bar.dart';
 import 'package:internship2/Providers/_buildBottomBar.dart';
-import '../../models/views/due_display.dart';
+import '../../../models/views/lapse_display.dart';
 
-class due extends StatefulWidget {
-  static const id = '/due';
+class lapse extends StatefulWidget {
+  static const id = '/lapse';
   @override
-  State<due> createState() => _dueState();
+  State<lapse> createState() => _lapseState();
 }
 
-class _dueState extends State<due> {
+class _lapseState extends State<lapse> {
   int _currentIndex = 1;
   final _inactiveColor = Color(0xffEBEBEB);
   @override
@@ -88,11 +88,11 @@ class _dueState extends State<due> {
           ),
           Container(
             height: size.height * 0.23,
-            child: due_data(size: size),
+            child: lapse_data(size: size),
           ),
           Container(
             height: size.height * 0.23,
-            child: due_data(size: size),
+            child: lapse_data(size: size),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 12.0),
@@ -132,17 +132,17 @@ class _dueState extends State<due> {
       onItemSelected: (index) => setState(() => _currentIndex = index),
       items: <AboveNavyBarItem>[
         AboveNavyBarItem(
-          alpha: 'All',
+          alpha: '3 months',
           activeColor: Colors.grey,
           inactiveColor: _inactiveColor,
         ),
         AboveNavyBarItem(
-          alpha: 'A',
+          alpha: '6 Months',
           activeColor: Colors.grey,
           inactiveColor: _inactiveColor,
         ),
         AboveNavyBarItem(
-          alpha: 'B',
+          alpha: '1 Year',
           activeColor: Colors.grey,
           inactiveColor: _inactiveColor,
         ),

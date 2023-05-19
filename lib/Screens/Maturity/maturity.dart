@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:internship2/Providers/scheme_selector.dart';
+import 'package:internship2/Providers/month_selector.dart';
 import 'package:internship2/Providers/custom_animated_bottom_bar.dart';
 import 'package:internship2/Providers/_buildBottomBar.dart';
-import '../../models/views/due_display.dart';
+import '../../models/views/maturity_display.dart';
 
-class due extends StatefulWidget {
-  static const id = '/due';
+class maturity extends StatefulWidget {
+  static const id = '/maturity';
   @override
-  State<due> createState() => _dueState();
+  State<maturity> createState() => _maturityState();
 }
 
-class _dueState extends State<due> {
+class _maturityState extends State<maturity> {
   int _currentIndex = 1;
   final _inactiveColor = Color(0xffEBEBEB);
   @override
@@ -88,11 +88,11 @@ class _dueState extends State<due> {
           ),
           Container(
             height: size.height * 0.23,
-            child: due_data(size: size),
+            child: maturity_data(size: size),
           ),
           Container(
             height: size.height * 0.23,
-            child: due_data(size: size),
+            child: maturity_data(size: size),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 12.0),
@@ -132,17 +132,22 @@ class _dueState extends State<due> {
       onItemSelected: (index) => setState(() => _currentIndex = index),
       items: <AboveNavyBarItem>[
         AboveNavyBarItem(
-          alpha: 'All',
+          alpha: 'CurrentMonth',
           activeColor: Colors.grey,
           inactiveColor: _inactiveColor,
         ),
         AboveNavyBarItem(
-          alpha: 'A',
+          alpha: '3 months',
           activeColor: Colors.grey,
           inactiveColor: _inactiveColor,
         ),
         AboveNavyBarItem(
-          alpha: 'B',
+          alpha: '6 Months',
+          activeColor: Colors.grey,
+          inactiveColor: _inactiveColor,
+        ),
+        AboveNavyBarItem(
+          alpha: '1 Year',
           activeColor: Colors.grey,
           inactiveColor: _inactiveColor,
         ),
