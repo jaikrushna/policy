@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:internship2/Screens/Account/Account_Master.dart';
+import 'package:internship2/Screens/Records/records.dart';
 import 'package:internship2/models/views/menu_tile.dart';
 import 'package:internship2/Screens/Due/due.dart';
 import 'package:internship2/Screens/Maturity/maturity.dart';
@@ -38,7 +39,7 @@ class menu extends StatelessWidget {
               menu_tile(
                 tle: 'Records ',
                 logo: Image.asset('assets/menu/records.png'),
-                route: '',
+                route: Record_Page.id,
               ),
               menu_tile(
                 tle: 'Lapse '

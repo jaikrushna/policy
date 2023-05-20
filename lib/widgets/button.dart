@@ -14,26 +14,29 @@ class button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: size,
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.all(
-          Radius.circular(40),
-        ),
-        border: Border.all(
-          width: 2,
+    return InkWell(
+      onTap: () {},
+      child: Container(
+        width: size,
+        decoration: BoxDecoration(
           color: color,
-          style: BorderStyle.solid,
+          borderRadius: BorderRadius.all(
+            Radius.circular(40),
+          ),
+          border: Border.all(
+            width: 2,
+            color: color,
+            style: BorderStyle.solid,
+          ),
         ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: Center(
-          child: Text(
-            '$text',
-            style: TextStyle(
-              color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Center(
+            child: Text(
+              '$text',
+              style: TextStyle(
+                color: Colors.white,
+              ),
             ),
           ),
         ),

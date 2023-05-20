@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:internship2/Screens/Records/records.dart';
 import 'package:internship2/Screens/plaace.dart';
 import 'package:internship2/Screens/place_edit.dart';
 import 'Screens/usersearch.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
                   acc_master.id: (ctx) => acc_master(),
                   newmem.id: (ctx) => newmem(),
                   user.id: (ctx) => user(),
+                  Record_Page.id: (ctx) => Record_Page(),
                 }));
   }
 }
