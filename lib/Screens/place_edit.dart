@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:internship2/Screens/usersearch.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:internship2/models/User_Tile/place_edit_tile.dart';
 
 class placeedit extends StatefulWidget {
   const placeedit({Key? key}) : super(key: key);
@@ -9,6 +11,10 @@ class placeedit extends StatefulWidget {
 }
 
 class _placeeditState extends State<placeedit> {
+  late String place_name;
+  late String place_posted;
+  var _isloading = false;
+  final _firestone = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -50,80 +56,42 @@ class _placeeditState extends State<placeedit> {
       body: SingleChildScrollView(
         child: Column(children: [
           SizedBox(
-            height: size.height * 0.03,
-          ),
-          ListTile(
-            selected: false,
-            focusColor: Color(0xffA9C8C5),
-            tileColor: Colors.white,
-            selectedTileColor: Color(0xffA9C8C5),
-            leading: Container(
-              child: Image.asset('assets/place_edit/h1.png'),
-            ),
-            title: Text(
-              'Chiran Road',
-              style: TextStyle(
-                color: Colors.black,
-              ),
-            ),
-          ),
-          SizedBox(
             height: size.height * 0.005,
           ),
-          ListTile(
-            selected: false,
-            focusColor: Color(0xffA9C8C5),
-            tileColor: Colors.white,
-            selectedTileColor: Color(0xffA9C8C5),
-            leading: Container(
-              child: Image.asset('assets/place_edit/h2.png'),
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            title: Text(
-              'Khudai Road',
-              style: TextStyle(
-                color: Colors.black,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: size.height * 0.005,
-          ),
-          ListTile(
-            selected: false,
-            focusColor: Color(0xffA9C8C5),
-            tileColor: Colors.white,
-            selectedTileColor: Color(0xffA9C8C5),
-            leading: Container(
-              child: Image.asset('assets/place_edit/h3.png'),
-            ),
-            title: Text(
-              'Basant Road',
-              style: TextStyle(
-                color: Colors.black,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: size.height * 0.005,
-          ),
-          ListTile(
-            selected: false,
-            focusColor: Color(0xffA9C8C5),
-            tileColor: Colors.white,
-            selectedTileColor: Color(0xffA9C8C5),
-            leading: Container(
-              child: Image.asset('assets/place_edit/h4.png'),
-            ),
-            title: Text(
-              'Rewa Road',
-              style: TextStyle(
-                color: Colors.black,
-              ),
-            ),
-          ),
+          StreamBuilder(
+              stream: _firestone
+                  .collection('new_place')
+                  .orderBy('Name')
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      backgroundColor: Colors.lightBlueAccent,
+                    ),
+                  );
+                }
+                final tiles = snapshot.data!.docs;
+                List<Widget> Memberlist = [];
+                for (var tile in tiles) {
+                  place_name = tile.get('Name');
+                  Memberlist.add(place_edit_tile(place_name));
+                }
+                return _isloading
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : Column(
+                        children: [
+                          SizedBox(
+                              height: size.height,
+                              child: ListView.builder(
+                                itemCount: Memberlist.length,
+                                itemBuilder: (context, i) => Memberlist[i],
+                              )),
+                        ],
+                      );
+              })
         ]),
       ),
       floatingActionButton: Container(
@@ -133,128 +101,69 @@ class _placeeditState extends State<placeedit> {
             showModalBottomSheet(
                 context: context,
                 builder: (context) {
-                  return Container(
-                    color: Color(0xffBBF5F1),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Flexible(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Color(0xff757575),
-                            ),
-                          ),
-                        ),
-                        Container(
-                            child: Column(
+                  return Flexible(
+                    child: Container(
+                      color: Color(0xffBBF5F1),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Row(children: [
+                              SizedBox(height: 16.0),
                               Image.asset(
                                 'assets/Line 8.png',
                               ),
+                              SizedBox(width: 16.0),
                               Text(
                                 'New Place',
                                 style: TextStyle(color: Color(0xff205955)),
                               ),
                             ]),
-                            Row(
-                              children: [
-                                TextField(
-                                    style: TextStyle(
-                                      color: Colors.black87,
-                                    ),
-                                    textAlign: TextAlign.left,
-                                    onChanged: (value) {},
-                                    decoration: InputDecoration(
-                                        hintText: 'Place Name')),
-                              ],
-                            )
+                            SizedBox(height: 16.0),
+                            TextField(
+                                style: TextStyle(
+                                  color: Colors.black87,
+                                ),
+                                textAlign: TextAlign.left,
+                                onChanged: (value) {
+                                  place_posted = value;
+                                  setState(() {});
+                                },
+                                decoration:
+                                    InputDecoration(hintText: 'Place Name')),
+                            SizedBox(height: 16.0),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: Color(0xff29756F), // Text color
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15.0)),
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 16.0,
+                                    vertical: 8.0), // Button padding
+                              ),
+                              onPressed: () {
+                                _firestone.collection('new_place').add({
+                                  'Name': place_posted,
+                                });
+                                setState(() {
+                                  Navigator.of(context).pop();
+                                });
+                                // Perform actions here
+                                // Close the bottom sheet
+                              },
+                              child: Text(
+                                'Save',
+                                style: TextStyle(
+                                  color: Colors.black87,
+                                ),
+                              ),
+                            ),
                           ],
-                        )),
-                        // Row(
-                        //   children: [
-                        //     TextField(
-                        //         style: TextStyle(
-                        //           color: Colors.black87,
-                        //         ),
-                        //         textAlign: TextAlign.left,
-                        //         onChanged: (value) {},
-                        //         decoration:
-                        //             InputDecoration(hintText: 'Place Name')),
-                        //   ],
-                        // )
-                        // Row(
-                        //   children: [
-                        //     Container(
-                        //         // child: Image.asset(
-                        //         //   'assets/pen.png',
-                        //         // ),
-                        //         ),
-                        //     TextField(
-                        //         style: TextStyle(
-                        //           color: Colors.black87,
-                        //         ),
-                        //         textAlign: TextAlign.left,
-                        //         onChanged: (value) {},
-                        //         decoration:
-                        //             InputDecoration(hintText: 'Place Name')),
-                        //   ],
-                        // ),
-                        //     ListTile(
-                        //       tileColor: Color(0xffBBF5F1),
-                        //       // leading: Container(
-                        //       //   child: Image.asset(
-                        //       //     'assets/pen.png',
-                        //       //     scale: 5,
-                        //       //   ),
-                        //       // ),
-                        //       onTap: () {},
-                        //       trailing: TextField(
-                        //           style: TextStyle(
-                        //             color: Colors.black87,
-                        //           ),
-                        //           textAlign: TextAlign.left,
-                        //           onChanged: (value) {},
-                        //           decoration:
-                        //               InputDecoration(hintText: 'Place Name')),
-                        //     ),
-                        // ListTile(
-                        //   tileColor: Color(0xffBBF5F1),
-                        //   // leading: Container(
-                        //   //   child: Image.asset(
-                        //   //     'assets/img.png',
-                        //   //     scale: 5,
-                        //   //   ),
-                        //   // ),
-                        //   onTap: () {},
-                        //   trailing: TextField(
-                        //       style: TextStyle(
-                        //         color: Colors.black87,
-                        //       ),
-                        //       textAlign: TextAlign.left,
-                        //       onChanged: (value) {},
-                        //       decoration:
-                        //           InputDecoration(hintText: 'Place Name')),
-                        // ),
-                        // ListTile(
-                        //   tileColor: Color(0xffBBF5F1),
-                        //   // leading: Container(
-                        //   //   child: Image.asset(
-                        //   //     'assets/cic.png',
-                        //   //     scale: 5,
-                        //   //   ),
-                        //   // ),
-                        //   onTap: () {},
-                        //   trailing: TextField(
-                        //       style: TextStyle(
-                        //         color: Colors.black87,
-                        //       ),
-                        //       textAlign: TextAlign.left,
-                        //       onChanged: (value) {},
-                        //       decoration:
-                        //           InputDecoration(hintText: 'Place Name')),
-                        // ),
-                      ],
+                        ),
+                      ),
                     ),
                   );
                 });

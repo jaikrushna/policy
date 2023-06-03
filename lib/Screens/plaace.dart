@@ -2,6 +2,8 @@ import 'package:internship2/Providers/custom_animated_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:internship2/Screens/place_edit.dart';
 import 'package:internship2/Providers/_buildBottomBar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:internship2/models/User_Tile/place_tile.dart';
 
 class place extends StatefulWidget {
   const place({Key? key}) : super(key: key);
@@ -12,7 +14,10 @@ class place extends StatefulWidget {
 }
 
 class _placeState extends State<place> {
+  final _firestone = FirebaseFirestore.instance;
+  late String Name;
   int _currentIndex = 0;
+  var _isloading = false;
   bool sel = true;
   bool notsel = true;
   final _inactiveColor = Color(0xff71757A);
@@ -38,173 +43,40 @@ class _placeState extends State<place> {
           SizedBox(
             height: size.height * 0.005,
           ),
-          Card(
-            elevation: 3,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: ListTile(
-              onTap: () {
-                if (sel == true) {
-                  sel = false;
-                  setState(() {});
-                } else {
-                  sel == true;
-                  setState(() {});
+          StreamBuilder(
+              stream: _firestone
+                  .collection('new_place')
+                  .orderBy('Name')
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      backgroundColor: Colors.lightBlueAccent,
+                    ),
+                  );
                 }
-              },
-              selected: sel,
-              focusColor: Color(0xffA9C8C5),
-              tileColor: Colors.white,
-              selectedTileColor: Color(0xffA9C8C5),
-              leading: Container(
-                child: Image.asset('assets/house-line-fill 1.png'),
-              ),
-              trailing: CircleAvatar(
-                backgroundColor: sel ? Color(0xffD9D9D9F) : Color(0xff29756F),
-                child: Text(
-                  '40',
-                  style: TextStyle(
-                    color: sel ? Colors.black : Colors.white60,
-                  ),
-                ),
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              title: Center(
-                child: Text(
-                  'Chiran Road',
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: size.height * 0.005,
-          ),
-          Card(
-            elevation: 3,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: ListTile(
-              onTap: () {
-                if (sel == true) {
-                  sel = false;
-                  setState(() {});
-                } else {
-                  sel == true;
-                  setState(() {});
+                final tiles = snapshot.data!.docs;
+                List<Widget> Memberlist = [];
+                for (var tile in tiles) {
+                  Name = tile.get('Name');
+                  Memberlist.add(place_tile(Name));
                 }
-              },
-              selected: false,
-              focusColor: Color(0xffA9C8C5),
-              tileColor: Colors.white,
-              selectedTileColor: Color(0xffA9C8C5),
-              leading: Container(
-                child: Image.asset('assets/house-line-fill 1.png'),
-              ),
-              trailing: CircleAvatar(
-                backgroundColor: Color(0xff29756F),
-                child: Text(
-                  '40',
-                  style: TextStyle(
-                    color: Colors.white60,
-                  ),
-                ),
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              title: Center(
-                child: Text(
-                  'Chiran Road',
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: size.height * 0.005,
-          ),
-          Card(
-            elevation: 3,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: ListTile(
-              selected: false,
-              focusColor: Color(0xffA9C8C5),
-              tileColor: Colors.white,
-              selectedTileColor: Color(0xffA9C8C5),
-              leading: Container(
-                child: Image.asset('assets/house-line-fill 1.png'),
-              ),
-              trailing: CircleAvatar(
-                backgroundColor: Color(0xff29756F),
-                child: Text(
-                  '40',
-                  style: TextStyle(
-                    color: Colors.white60,
-                  ),
-                ),
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              title: Center(
-                child: Text(
-                  'Chiran Road',
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: size.height * 0.005,
-          ),
-          Card(
-            elevation: 10,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: ListTile(
-              selected: false,
-              focusColor: Color(0xffA9C8C5),
-              tileColor: Colors.white,
-              selectedTileColor: Color(0xffA9C8C5),
-              leading: Container(
-                child: Image.asset('assets/house-line-fill 1.png'),
-              ),
-              trailing: CircleAvatar(
-                backgroundColor: Color(0xff29756F),
-                child: Text(
-                  '40',
-                  style: TextStyle(
-                    color: Colors.white60,
-                  ),
-                ),
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              title: Center(
-                child: Text(
-                  'Rea Road',
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ),
-          ),
+                return _isloading
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : Column(
+                        children: [
+                          SizedBox(
+                              height: size.height,
+                              child: ListView.builder(
+                                itemCount: Memberlist.length,
+                                itemBuilder: (context, i) => Memberlist[i],
+                              )),
+                        ],
+                      );
+              })
         ]),
       ),
       floatingActionButton: Container(
@@ -228,45 +100,4 @@ class _placeState extends State<place> {
       bottomNavigationBar: buildBottomBar(),
     );
   }
-
-  // Widget _buildBottomBar() {
-  //   return CustomAnimatedBottomBar(
-  //     rute: '/place',
-  //     containerHeight: 70,
-  //     backgroundColor: Colors.white,
-  //     selectedIndex: _currentIndex,
-  //     showElevation: true,
-  //     itemCornerRadius: 24,
-  //     curve: Curves.easeIn,
-  //     onItemSelected: (index) => setState(() => _currentIndex = index),
-  //     items: <BottomNavyBarItem>[
-  //       BottomNavyBarItem(
-  //         icon: Icon(Icons.account_circle_rounded),
-  //         activeColor: Color(0xff32B9AE),
-  //         inactiveColor: _inactiveColor,
-  //         route:
-  //       ),
-  //       BottomNavyBarItem(
-  //         icon: Icon(Icons.search_rounded),
-  //         activeColor: Color(0xff32B9AE),
-  //         inactiveColor: _inactiveColor,
-  //       ),
-  //       BottomNavyBarItem(
-  //         icon: Icon(Icons.home_filled),
-  //         activeColor: Color(0xff32B9AE),
-  //         inactiveColor: _inactiveColor,
-  //       ),
-  //       BottomNavyBarItem(
-  //         icon: Icon(Icons.event_note_sharp),
-  //         activeColor: Color(0xff32B9AE),
-  //         inactiveColor: _inactiveColor,
-  //       ),
-  //       BottomNavyBarItem(
-  //         icon: Icon(Icons.account_balance),
-  //         activeColor: Color(0xff32B9AE),
-  //         inactiveColor: _inactiveColor,
-  //       ),
-  //     ],
-  //   );
-  // }
 }

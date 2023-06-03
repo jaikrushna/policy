@@ -42,7 +42,6 @@ dependencies:
   firebase_storage: ^10.3.8
   flutter_switch: ^0.3.2
 
-
 #dependency_overrides:
 #  firebase_core_platform_interface: 4.5.1
 
