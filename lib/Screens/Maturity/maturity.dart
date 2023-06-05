@@ -3,6 +3,7 @@ import 'package:internship2/Providers/month_selector.dart';
 import 'package:internship2/Providers/custom_animated_bottom_bar.dart';
 import 'package:internship2/Providers/_buildBottomBar.dart';
 import '../../models/views/maturity_display.dart';
+import 'package:internship2/Screens/Menu.dart';
 
 class maturity extends StatefulWidget {
   static const id = '/maturity';
@@ -20,9 +21,17 @@ class _maturityState extends State<maturity> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
-        leading: Icon(
-          Icons.arrow_back_ios_new_outlined,
-          color: Color(0xff144743),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const menu()),
+            );
+          },
+          icon: Icon(
+            Icons.arrow_back_ios_new_outlined,
+            color: Color(0xff144743),
+          ),
         ),
         backgroundColor: Colors.white,
         title: Row(

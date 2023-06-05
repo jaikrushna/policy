@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:internship2/Screens/Menu.dart';
 
 class Client_dbt extends StatelessWidget {
   const Client_dbt({Key? key}) : super(key: key);
@@ -10,9 +11,17 @@ class Client_dbt extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white,
-          leading: Icon(
-            Icons.arrow_back_ios_new_outlined,
-            color: Color(0xff144743),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const menu()),
+              );
+            },
+            icon: Icon(
+              Icons.arrow_back_ios_new_outlined,
+              color: Color(0xff144743),
+            ),
           ),
         ),
         body: Padding(

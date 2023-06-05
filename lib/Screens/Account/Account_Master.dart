@@ -3,6 +3,8 @@ import 'package:internship2/Providers/scheme_selector.dart';
 import 'package:internship2/Providers/custom_animated_bottom_bar.dart';
 import 'package:internship2/Providers/_buildBottomBar.dart';
 import '../../models/views/displayed_data.dart';
+import 'package:internship2/Screens/Menu.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class acc_master extends StatefulWidget {
   static const id = '/acc_master';
@@ -13,6 +15,13 @@ class acc_master extends StatefulWidget {
 class _acc_masterState extends State<acc_master> {
   int _currentIndex = 1;
   int _currentscheme = 0;
+  late String Member_Name;
+  late String Plan;
+  late String Account_No;
+  late Timestamp date_open;
+  late Timestamp date_mature;
+  var _isloading = false;
+  late final _firestone = FirebaseFirestore.instance;
   final _inactiveColor = Color(0xffEBEBEB);
   @override
   Widget build(BuildContext context) {
@@ -21,9 +30,17 @@ class _acc_masterState extends State<acc_master> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
-        leading: Icon(
-          Icons.arrow_back_ios_new_outlined,
-          color: Color(0xff144743),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const menu()),
+            );
+          },
+          icon: Icon(
+            Icons.arrow_back_ios_new_outlined,
+            color: Color(0xff144743),
+          ),
         ),
         backgroundColor: Colors.white,
         title: Row(
@@ -71,49 +88,90 @@ class _acc_masterState extends State<acc_master> {
               child: _buildAboveBar(),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 12.0),
-            child: Row(
-              children: [
-                Text(
-                  'Chiran Road',
-                  style: TextStyle(
-                    fontSize: 13.5,
-                    color: Color(0xff205955),
-                    fontWeight: FontWeight.w500,
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-                // Text(
-                //   'Chiran Road',
-                //   textAlign: TextAlign.left,
-                // ),
-              ],
-            ),
-          ),
-          displayeddata(size: size),
-          displayeddata(size: size),
-          Padding(
-            padding: const EdgeInsets.only(left: 12.0),
-            child: Row(
-              children: [
-                Text(
-                  'Rewa Road',
-                  style: TextStyle(
-                    fontSize: 13.5,
-                    color: Color(0xff205955),
-                    fontWeight: FontWeight.w500,
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-                // Text(
-                //   'Chiran Road',
-                //   textAlign: TextAlign.left,
-                // ),
-              ],
-            ),
-          ),
-          displayeddata(size: size),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 12.0),
+          //   child: Row(
+          //     children: [
+          //       Text(
+          //         'Chiran Road',
+          //         style: TextStyle(
+          //           fontSize: 13.5,
+          //           color: Color(0xff205955),
+          //           fontWeight: FontWeight.w500,
+          //         ),
+          //         textAlign: TextAlign.left,
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          StreamBuilder(
+              stream: _firestone
+                  .collection('new_account')
+                  .orderBy('Member_Name')
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      backgroundColor: Colors.lightBlueAccent,
+                    ),
+                  );
+                }
+                final tiles = snapshot.data!.docs;
+                List<Widget> Memberlist = [];
+                for (var tile in tiles) {
+                  Member_Name = tile.get('Member_Name');
+                  Plan = tile.get('Plan');
+                  Account_No = tile.get('Account_No').toString();
+                  date_open = tile.get('Date_of_Opening');
+                  date_mature = tile.get('Date_of_Maturity');
+                  Memberlist.add(
+                    displayeddata(
+                      size: size,
+                      Member_Name: Member_Name,
+                      Plan: Plan,
+                      Account_No: Account_No,
+                      date_mature: date_mature,
+                      date_open: date_open,
+                    ),
+                  );
+                }
+                return _isloading
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : Column(
+                        children: [
+                          SizedBox(
+                              height: size.height,
+                              child: ListView.builder(
+                                itemCount: Memberlist.length,
+                                itemBuilder: (context, i) => Memberlist[i],
+                              )),
+                        ],
+                      );
+              })
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 12.0),
+          //   child: Row(
+          //     children: [
+          //       Text(
+          //         'Rewa Road',
+          //         style: TextStyle(
+          //           fontSize: 13.5,
+          //           color: Color(0xff205955),
+          //           fontWeight: FontWeight.w500,
+          //         ),
+          //         textAlign: TextAlign.left,
+          //       ),
+          // Text(
+          //   'Chiran Road',
+          //   textAlign: TextAlign.left,
+          // ),
+          //     ],
+          //   ),
+          // ),
+          // displayeddata(size: size),
         ],
       ),
       bottomNavigationBar: buildBottomBar(),
