@@ -13,20 +13,23 @@ class newmem extends StatefulWidget {
 class _newmemState extends State<newmem> {
   late String Member_Name;
   String Plan = 'B';
-  late double Account_No;
+  late String Account_No;
   late String Address;
   late String Amount_Collected;
   late String Amount_Remaining;
-  late double Phone_No;
-  late String Type;
-
-  String dropdownvalue = 'Monthly';
+  late String Phone_No;
+  String Type = 'Daily';
+  late String Premium_Plan;
+  late String CIF_No;
+  String dropdownvalue = 'Daily';
   final _firestone = FirebaseFirestore.instance;
   bool selA = false;
   bool selB = true;
   var items = [
     'Monthly',
-    'Yearly',
+    'Daily',
+    'Weekly',
+    'Quarterly',
   ];
   Event buildEvent({Recurrence? recurrence}) {
     return Event(
@@ -102,7 +105,24 @@ class _newmemState extends State<newmem> {
                           Container(
                             height: size.height * 0.035,
                             width: size.width * 0.4,
-                            child: Center(child: Text('Premium Plan')),
+                            child: Padding(
+                              padding:
+                                  EdgeInsets.fromLTRB(19.0, 10.0, 0.0, 0.0),
+                              child: Center(
+                                child: TextField(
+                                    style: TextStyle(
+                                      color: Colors.black87,
+                                    ),
+                                    textAlign: TextAlign.left,
+                                    onChanged: (value) {
+                                      Premium_Plan = value;
+                                    },
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: 'Premium Plan',
+                                    )),
+                              ),
+                            ),
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.all(
@@ -226,7 +246,7 @@ class _newmemState extends State<newmem> {
                                     ),
                                     textAlign: TextAlign.left,
                                     onChanged: (value) {
-                                      Account_No = double.parse(value);
+                                      Account_No = value;
                                     },
                                     decoration: InputDecoration(
                                         hintText: 'Account No')),
@@ -241,13 +261,10 @@ class _newmemState extends State<newmem> {
                           ),
                         ),
                         DropdownButton(
-                          // Initial Value
                           value: dropdownvalue,
 
-                          // Down Arrow Icon
                           icon: const Icon(Icons.keyboard_arrow_down),
 
-                          // Array list of items
                           items: items.map((String items) {
                             return DropdownMenuItem(
                               value: items,
@@ -262,6 +279,43 @@ class _newmemState extends State<newmem> {
                               Type = dropdownvalue;
                             });
                           },
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          child: Image.asset(
+                            'assets/pen.png',
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            height: size.height * 0.045,
+                            width: size.width * 0.7,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Center(
+                                child: TextField(
+                                    style: TextStyle(
+                                      color: Colors.black87,
+                                    ),
+                                    textAlign: TextAlign.left,
+                                    onChanged: (value) {
+                                      CIF_No = value;
+                                    },
+                                    decoration:
+                                        InputDecoration(hintText: 'CIF No')),
+                              ),
+                            ),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                                border: Border.all(color: Colors.grey)),
+                          ),
                         ),
                       ],
                     ),
@@ -467,7 +521,7 @@ class _newmemState extends State<newmem> {
                                     ),
                                     textAlign: TextAlign.left,
                                     onChanged: (value) {
-                                      Phone_No = double.parse(value);
+                                      Phone_No = value;
                                     },
                                     decoration:
                                         InputDecoration(hintText: 'Phone No')),
@@ -500,6 +554,8 @@ class _newmemState extends State<newmem> {
                             'Type': Type,
                             'Date_of_Maturity': date_mature,
                             'Date_of_Opening': date_open,
+                            'CIF_No': CIF_No,
+                            'Premium_Plan': Premium_Plan,
                           });
                           setState(() {
                             Navigator.of(context).pop();
