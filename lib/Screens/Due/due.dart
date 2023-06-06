@@ -50,71 +50,87 @@ class _dueState extends State<due> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(40),
-                  ),
-                  border: Border.all(
-                    width: 3,
-                    color: Colors.grey,
-                    style: BorderStyle.solid,
-                  ),
-                ),
-                child: _buildAboveBar(),
+      body: Column(
+        children: [
+          Container(
+            height: 80,
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(40),
+              ),
+              border: Border.all(
+                width: 3,
+                color: Colors.grey,
+                style: BorderStyle.solid,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 12.0),
-              child: Row(
+            child: _buildAboveBar(),
+          ),
+          Container(
+            height: size.height-260,
+            child: SingleChildScrollView(
+              
+              child: Column(
                 children: [
-                  Text(
-                    'Chiran Road',
-                    style: TextStyle(
-                      fontSize: 13.5,
-                      color: Color(0xff205955),
-                      fontWeight: FontWeight.w500,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 12.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Chiran Road',
+                          style: TextStyle(
+                            fontSize: 13.5,
+                            color: Color(0xff205955),
+                            fontWeight: FontWeight.w500,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                      ],
                     ),
-                    textAlign: TextAlign.left,
+                  ),
+                  Container(
+                    height: size.height * 0.23,
+                    child: due_data(size: size),
+                  ),
+                  Container(
+                    height: size.height * 0.23,
+                    child: due_data(size: size),
+                  ),
+                  Container(
+                    height: size.height * 0.23,
+                    child: due_data(size: size),
+                  ),
+                  Container(
+                    height: size.height * 0.23,
+                    child: due_data(size: size),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 12.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Rewa Road',
+                          style: TextStyle(
+                            fontSize: 13.5,
+                            color: Color(0xff205955),
+                            fontWeight: FontWeight.w500,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-            Container(
-              height: size.height * 0.23,
-              child: due_data(size: size),
-            ),
-            Container(
-              height: size.height * 0.23,
-              child: due_data(size: size),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 12.0),
-              child: Row(
-                children: [
-                  Text(
-                    'Rewa Road',
-                    style: TextStyle(
-                      fontSize: 13.5,
-                      color: Color(0xff205955),
-                      fontWeight: FontWeight.w500,
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                ],
-              ),
-            ),
-            // Container(
-            //   height: size.height * 0.23,
-            //   child: due_data(size: size),
-            // ),
-          ],
-        ),
+          )
+
+          // Container(
+          //   height: size.height * 0.23,
+          //   child: due_data(size: size),
+          // ),
+        ],
       ),
       bottomNavigationBar: buildBottomBar(),
     );
