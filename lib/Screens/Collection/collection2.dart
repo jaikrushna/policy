@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:internship2/Providers/scheme_selector.dart';
-import 'package:internship2/Providers/custom_animated_bottom_bar.dart';
 import 'package:internship2/Providers/_buildBottomBar.dart';
 import '../../models/views/due_display.dart';
 import 'package:internship2/Screens/Menu.dart';
@@ -18,11 +17,35 @@ class _collection2State extends State<collection2> {
   late String Account_No;
   late Timestamp date_open;
   late Timestamp date_mature;
+  String Type = 'Daily';
   var _isloading = false;
   late final _firestone = FirebaseFirestore.instance;
   int _currentIndex = 0;
   int _currentIndex2 = 0;
   final _inactiveColor = Color(0xffEBEBEB);
+  void addData(List<Widget> Memberlist, size) {
+    Memberlist.add(
+      due_data(
+        size: size,
+        Member_Name: Member_Name,
+        Plan: Plan,
+        Account_No: Account_No,
+        date_mature: date_mature,
+        date_open: date_open,
+      ),
+    );
+  }
+
+  void condition(List<Widget> Memberlist, size, type, index) {
+    if (type == 'Daily' && index == 0)
+      addData(Memberlist, size);
+    else if (type == 'Weekly' && index == 1)
+      addData(Memberlist, size);
+    else if (type == 'Monthly' && index == 2)
+      addData(Memberlist, size);
+    else if (type == 'Quarterly' && index == 3) addData(Memberlist, size);
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -117,16 +140,16 @@ class _collection2State extends State<collection2> {
                   Account_No = tile.get('Account_No').toString();
                   date_open = tile.get('Date_of_Opening');
                   date_mature = tile.get('Date_of_Maturity');
-                  Memberlist.add(
-                    due_data(
-                      size: size,
-                      Member_Name: Member_Name,
-                      Plan: Plan,
-                      Account_No: Account_No,
-                      date_mature: date_mature,
-                      date_open: date_open,
-                    ),
-                  );
+                  Type = tile.get('Type');
+                  if (_currentIndex == 1) {
+                    if (Plan == 'A')
+                      condition(Memberlist, size, Type, _currentIndex2);
+                  } else if (_currentIndex == 2) {
+                    if (Plan == 'B')
+                      condition(Memberlist, size, Type, _currentIndex2);
+                  } else {
+                    condition(Memberlist, size, Type, _currentIndex2);
+                  }
                 }
                 return _isloading
                     ? Center(
@@ -145,24 +168,6 @@ class _collection2State extends State<collection2> {
                         ),
                       );
               }),
-          // SingleChildScrollView(
-          //   child: Column(
-          //     children: [
-          //       Container(
-          //         height: size.height * 0.25,
-          //         child: due_data(size: size),
-          //       ),
-          //       Container(
-          //         height: size.height * 0.25,
-          //         child: due_data(size: size),
-          //       ),
-          // Container(
-          //   height: size.height * 0.23,
-          //   child: due_data(size: size),
-          // ),
-          //     ],
-          //   ),
-          // ),
         ],
       ),
       bottomNavigationBar: buildBottomBar(),

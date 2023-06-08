@@ -10,6 +10,7 @@ import 'Screens/Due/due.dart';
 import 'Screens/Maturity/maturity.dart';
 import 'Screens/Lapse/lapse.dart';
 import 'Screens/Collection/collection.dart';
+import 'Screens/Collection/collection2.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,8 +30,9 @@ class MyApp extends StatelessWidget {
                 theme: ThemeData(
                   primarySwatch: Colors.blue,
                 ),
-                initialRoute: collection.id,
+                initialRoute: collection2.id,
                 routes: {
+                  collection2.id: (ctx) => collection2(),
                   collection.id: (ctx) => collection(),
                   lapse.id: (ctx) => lapse(),
                   maturity.id: (ctx) => maturity(),
