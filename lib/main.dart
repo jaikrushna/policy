@@ -4,12 +4,12 @@ import 'package:internship2/Screens/place_edit.dart';
 import 'Screens/usersearch.dart';
 import 'Screens/newmember.dart';
 import 'Screens/Account/Account_Master.dart';
-import 'Screens/Account/client_dtbase.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'Screens/Menu.dart';
 import 'Screens/Due/due.dart';
 import 'Screens/Maturity/maturity.dart';
 import 'Screens/Lapse/lapse.dart';
+import 'Screens/Collection/collection.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,8 +29,9 @@ class MyApp extends StatelessWidget {
                 theme: ThemeData(
                   primarySwatch: Colors.blue,
                 ),
-                initialRoute: menu.id,
+                initialRoute: collection.id,
                 routes: {
+                  collection.id: (ctx) => collection(),
                   lapse.id: (ctx) => lapse(),
                   maturity.id: (ctx) => maturity(),
                   due.id: (ctx) => due(),
