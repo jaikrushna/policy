@@ -42,10 +42,76 @@ class _placeeditState extends State<placeedit> {
             IconButton(
                 iconSize: 50,
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const user()),
-                  );
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return Flexible(
+                          child: Container(
+                            color: Color(0xffBBF5F1),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Row(children: [
+                                    SizedBox(height: 16.0),
+                                    Image.asset(
+                                      'assets/Line 8.png',
+                                    ),
+                                    SizedBox(width: 16.0),
+                                    Text(
+                                      'New Place',
+                                      style:
+                                          TextStyle(color: Color(0xff205955)),
+                                    ),
+                                  ]),
+                                  SizedBox(height: 16.0),
+                                  TextField(
+                                      style: TextStyle(
+                                        color: Colors.black87,
+                                      ),
+                                      textAlign: TextAlign.left,
+                                      onChanged: (value) {
+                                        place_posted = value;
+                                        setState(() {});
+                                      },
+                                      decoration: InputDecoration(
+                                          hintText: 'Place Name')),
+                                  SizedBox(height: 16.0),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Color(0xff29756F), // Text color
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(15.0)),
+                                      ),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 16.0,
+                                          vertical: 8.0), // Button padding
+                                    ),
+                                    onPressed: () {
+                                      _firestone.collection('new_place').add({
+                                        'Name': place_posted,
+                                      });
+                                      setState(() {
+                                        Navigator.of(context).pop();
+                                      });
+                                      // Perform actions here
+                                      // Close the bottom sheet
+                                    },
+                                    child: Text(
+                                      'Save',
+                                      style: TextStyle(
+                                        color: Colors.black87,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      });
                 },
                 // height: size.height * 0.09,
                 // width: size.width * 0.09,
@@ -94,90 +160,89 @@ class _placeeditState extends State<placeedit> {
               })
         ]),
       ),
-      floatingActionButton: Container(
-        width: size.width * 0.9,
-        child: FloatingActionButton(
-          onPressed: () {
-            showModalBottomSheet(
-                context: context,
-                builder: (context) {
-                  return Flexible(
-                    child: Container(
-                      color: Color(0xffBBF5F1),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Row(children: [
-                              SizedBox(height: 16.0),
-                              Image.asset(
-                                'assets/Line 8.png',
-                              ),
-                              SizedBox(width: 16.0),
-                              Text(
-                                'New Place',
-                                style: TextStyle(color: Color(0xff205955)),
-                              ),
-                            ]),
-                            SizedBox(height: 16.0),
-                            TextField(
-                                style: TextStyle(
-                                  color: Colors.black87,
-                                ),
-                                textAlign: TextAlign.left,
-                                onChanged: (value) {
-                                  place_posted = value;
-                                  setState(() {});
-                                },
-                                decoration:
-                                    InputDecoration(hintText: 'Place Name')),
-                            SizedBox(height: 16.0),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: Color(0xff29756F), // Text color
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(15.0)),
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 16.0,
-                                    vertical: 8.0), // Button padding
-                              ),
-                              onPressed: () {
-                                _firestone.collection('new_place').add({
-                                  'Name': place_posted,
-                                });
-                                setState(() {
-                                  Navigator.of(context).pop();
-                                });
-                                // Perform actions here
-                                // Close the bottom sheet
-                              },
-                              child: Text(
-                                'Save',
-                                style: TextStyle(
-                                  color: Colors.black87,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                });
-          },
-          child: Text(
-            'Create Place',
-          ),
-          backgroundColor: Color(0xff29756F),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(15.0)),
-          ),
-        ),
-      ),
+      // floatingActionButton: Container(
+      //   width: size.width * 0.9,
+      //   child: FloatingActionButton(
+      //     onPressed: () {
+      //   showModalBottomSheet(
+      //       context: context,
+      //       builder: (context) {
+      //         return Flexible(
+      //           child: Container(
+      //             color: Color(0xffBBF5F1),
+      //             child: Padding(
+      //               padding: const EdgeInsets.all(8.0),
+      //               child: Column(
+      //                 mainAxisSize: MainAxisSize.min,
+      //                 children: [
+      //                   Row(children: [
+      //                     SizedBox(height: 16.0),
+      //                     Image.asset(
+      //                       'assets/Line 8.png',
+      //                     ),
+      //                     SizedBox(width: 16.0),
+      //                     Text(
+      //                       'New Place',
+      //                       style: TextStyle(color: Color(0xff205955)),
+      //                     ),
+      //                   ]),
+      //                   SizedBox(height: 16.0),
+      //                   TextField(
+      //                       style: TextStyle(
+      //                         color: Colors.black87,
+      //                       ),
+      //                       textAlign: TextAlign.left,
+      //                       onChanged: (value) {
+      //                         place_posted = value;
+      //                         setState(() {});
+      //                       },
+      //                       decoration:
+      //                           InputDecoration(hintText: 'Place Name')),
+      //                   SizedBox(height: 16.0),
+      //                   ElevatedButton(
+      //                     style: ElevatedButton.styleFrom(
+      //                       primary: Color(0xff29756F), // Text color
+      //                       shape: RoundedRectangleBorder(
+      //                         borderRadius:
+      //                             BorderRadius.all(Radius.circular(15.0)),
+      //                       ),
+      //                       padding: EdgeInsets.symmetric(
+      //                           horizontal: 16.0,
+      //                           vertical: 8.0), // Button padding
+      //                     ),
+      //                     onPressed: () {
+      //                       _firestone.collection('new_place').add({
+      //                         'Name': place_posted,
+      //                       });
+      //                       setState(() {
+      //                         Navigator.of(context).pop();
+      //                       });
+      //                       // Perform actions here
+      //                       // Close the bottom sheet
+      //                     },
+      //                     child: Text(
+      //                       'Save',
+      //                       style: TextStyle(
+      //                         color: Colors.black87,
+      //                       ),
+      //                     ),
+      //                   ),
+      //                 ],
+      //               ),
+      //             ),
+      //           ),
+      //         );
+      //       });
+      // },
+      // child: Text(
+      //   'Create Place',
+      // ),
+      //   backgroundColor: Color(0xff29756F),
+      //   shape: RoundedRectangleBorder(
+      //     borderRadius: BorderRadius.all(Radius.circular(15.0)),
+      //   ),
+      // ),
+      // ),
     );
-    ;
   }
 }

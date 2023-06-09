@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
 class place_tile extends StatefulWidget {
-  place_tile(this.Name);
+  place_tile(this.Name, this.Location);
   String Name;
+  String Location = '';
   @override
-  State<place_tile> createState() => _place_tileState(Name);
+  State<place_tile> createState() => _place_tileState(Name, Location);
 }
 
 class _place_tileState extends State<place_tile> {
-  _place_tileState(
-    this.Name,
-  );
+  _place_tileState(this.Name, this.Location);
   // bool selected = false;
   late String Name;
+  String Location = '';
   bool sel = true;
   bool notsel = true;
   final _inactiveColor = Color(0xff71757A);
@@ -37,6 +37,7 @@ class _place_tileState extends State<place_tile> {
               sel == true;
               setState(() {});
             }
+            Navigator.of(context).pushNamed(Location);
           },
           selected: false,
           focusColor: Color(0xffA9C8C5),

@@ -60,7 +60,7 @@ class _placeState extends State<place> {
                 List<Widget> Memberlist = [];
                 for (var tile in tiles) {
                   Name = tile.get('Name');
-                  Memberlist.add(place_tile(Name));
+                  Memberlist.add(place_tile(Name, ''));
                 }
                 return _isloading
                     ? Center(

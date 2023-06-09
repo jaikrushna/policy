@@ -70,7 +70,7 @@ class _collectionState extends State<collection> {
                 List<Widget> Memberlist = [];
                 for (var tile in tiles) {
                   Name = tile.get('Name');
-                  Memberlist.add(place_tile(Name));
+                  Memberlist.add(place_tile(Name, '/collection2'));
                 }
                 return _isloading
                     ? Center(

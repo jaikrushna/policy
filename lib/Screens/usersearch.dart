@@ -5,13 +5,20 @@ import 'package:internship2/models/User_Tile/user_tile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class user extends StatefulWidget {
-  const user({Key? key}) : super(key: key);
+  user(
+    this.Place,
+  );
+  String Place;
   static const id = '/user';
   @override
-  State<user> createState() => _userState();
+  State<user> createState() => _userState(Place);
 }
 
 class _userState extends State<user> {
+  _userState(
+    this.Place,
+  );
+  String Place;
   late String Username;
   late String User_Amt;
   final _firestone = FirebaseFirestore.instance;
@@ -48,10 +55,30 @@ class _userState extends State<user> {
             height: size.height * 0.005,
           ),
           StreamBuilder(
-              stream: _firestone
-                  .collection('new_account')
-                  .orderBy('Member_Name')
-                  .snapshots(),
+              stream:
+                  //     _firestone.collection('new_account').doc().collection(Place) // Replace with your parent collection name
+                  //     .snapshots()
+                  //     .asyncMap((QuerySnapshot parentSnapshot) async {
+                  //   List<QuerySnapshot> nestedSnapshots = [];
+                  //
+                  //   for (var parentDoc in parentSnapshot.docs) {
+                  //     DocumentReference parentDocRef = parentDoc.reference;
+                  //     QuerySnapshot nestedSnapshot = await parentDocRef
+                  //         .collection('nestedCollection') // Replace with your nested collection name
+                  //         .get();
+                  //
+                  //     nestedSnapshots.add(nestedSnapshot);
+                  //   }
+                  //
+                  //   return nestedSnapshots;
+                  // });
+
+                  _firestone
+                      .collection('new_account')
+                      .doc(Place)
+                      .collection(Place)
+                      .orderBy('Member_Name')
+                      .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return Center(
@@ -90,7 +117,7 @@ class _userState extends State<user> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const newmem()),
+              MaterialPageRoute(builder: (context) => newmem(Place)),
             );
           },
           child: Text(

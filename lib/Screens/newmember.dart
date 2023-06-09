@@ -4,13 +4,20 @@ import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class newmem extends StatefulWidget {
-  const newmem({Key? key}) : super(key: key);
+  newmem(
+    this.Location,
+  );
+  String Location;
   static const String id = 'Newmem';
   @override
-  State<newmem> createState() => _newmemState();
+  State<newmem> createState() => _newmemState(Location);
 }
 
 class _newmemState extends State<newmem> {
+  _newmemState(
+    this.Location,
+  );
+  String Location;
   late String Member_Name;
   String Plan = 'B';
   late String Account_No;
@@ -543,7 +550,11 @@ class _newmemState extends State<newmem> {
                     ),
                     TextButton(
                         onPressed: () {
-                          _firestone.collection('new_account').add({
+                          _firestone
+                              .collection('new_account')
+                              .doc(Location)
+                              .collection(Location)
+                              .add({
                             'Member_Name': Member_Name,
                             'Plan': Plan,
                             'Account_No': Account_No,

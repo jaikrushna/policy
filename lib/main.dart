@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
                 theme: ThemeData(
                   primarySwatch: Colors.blue,
                 ),
-                initialRoute: collection2.id,
+                initialRoute: place.id,
                 routes: {
                   collection2.id: (ctx) => collection2(),
                   collection.id: (ctx) => collection(),
@@ -41,8 +41,8 @@ class MyApp extends StatelessWidget {
                   placeedit.id1: (ctx) => placeedit(),
                   place.id: (ctx) => place(),
                   acc_master.id: (ctx) => acc_master(),
-                  newmem.id: (ctx) => newmem(),
-                  user.id: (ctx) => user(),
+                  newmem.id: (ctx) => newmem(''),
+                  user.id: (ctx) => user(''),
                 }));
   }
 }
