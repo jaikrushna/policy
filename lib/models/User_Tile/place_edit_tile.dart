@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:internship2/Screens/usersearch.dart';
+import 'package:internship2/Screens/Place/usersearch.dart';
 
 class place_edit_tile extends StatelessWidget {
   place_edit_tile(this.Name);

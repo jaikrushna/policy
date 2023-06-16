@@ -35,6 +35,9 @@ class displayeddata extends StatelessWidget {
     final monthFormat = DateFormat.MMMM();
     final yearFormat = DateFormat.y();
 
+    DateTime dateTime = DateTime(DateTime.now().year, monthm);
+    String monthName = DateFormat('MMMM').format(dateTime);
+
     final currentMonth = monthFormat.format(now);
     final currentYear = yearFormat.format(now);
     return Column(
@@ -71,7 +74,7 @@ class displayeddata extends StatelessWidget {
                   padding: const EdgeInsets.all(4.0),
                   child: Center(
                     child: Text(
-                      '$currentMonth $currentYear',
+                      '$monthName $currentYear',
                       style: TextStyle(
                         color: Colors.white,
                       ),
@@ -166,25 +169,7 @@ class displayeddata extends StatelessWidget {
                     padding: EdgeInsets.all(8.0),
                     constraints: BoxConstraints(minWidth: 20),
                     onPressed: () {},
-                    child: Image.asset('assets/Acc/IC1.png'),
-                    elevation: 2.0,
-                    fillColor: Colors.white,
-                    shape: CircleBorder(),
-                  ),
-                  RawMaterialButton(
-                    padding: EdgeInsets.all(8.0),
-                    constraints: BoxConstraints(minWidth: 20),
-                    onPressed: () {},
                     child: Image.asset('assets/Acc/IC2.png'),
-                    elevation: 2.0,
-                    fillColor: Colors.white,
-                    shape: CircleBorder(),
-                  ),
-                  RawMaterialButton(
-                    padding: EdgeInsets.all(8.0),
-                    constraints: BoxConstraints(minWidth: 20),
-                    onPressed: () {},
-                    child: Image.asset('assets/Acc/IC3.png'),
                     elevation: 2.0,
                     fillColor: Colors.white,
                     shape: CircleBorder(),

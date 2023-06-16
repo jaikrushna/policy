@@ -1,6 +1,6 @@
 import 'package:internship2/Providers/custom_animated_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:internship2/Screens/newmember.dart';
+import 'package:internship2/Screens/Place/newmember.dart';
 import 'package:internship2/models/User_Tile/user_tile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -20,7 +20,10 @@ class _userState extends State<user> {
   );
   String Place;
   late String Username;
-  late String User_Amt;
+  late String startdate;
+  late String enddate;
+  late String amt;
+  late int monthly;
   final _firestone = FirebaseFirestore.instance;
   var _isloading = false;
   @override
@@ -55,30 +58,12 @@ class _userState extends State<user> {
             height: size.height * 0.005,
           ),
           StreamBuilder(
-              stream:
-                  //     _firestone.collection('new_account').doc().collection(Place) // Replace with your parent collection name
-                  //     .snapshots()
-                  //     .asyncMap((QuerySnapshot parentSnapshot) async {
-                  //   List<QuerySnapshot> nestedSnapshots = [];
-                  //
-                  //   for (var parentDoc in parentSnapshot.docs) {
-                  //     DocumentReference parentDocRef = parentDoc.reference;
-                  //     QuerySnapshot nestedSnapshot = await parentDocRef
-                  //         .collection('nestedCollection') // Replace with your nested collection name
-                  //         .get();
-                  //
-                  //     nestedSnapshots.add(nestedSnapshot);
-                  //   }
-                  //
-                  //   return nestedSnapshots;
-                  // });
-
-                  _firestone
-                      .collection('new_account')
-                      .doc(Place)
-                      .collection(Place)
-                      .orderBy('Member_Name')
-                      .snapshots(),
+              stream: _firestone
+                  .collection('new_account')
+                  .doc(Place)
+                  .collection(Place)
+                  .orderBy('Member_Name')
+                  .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return Center(
@@ -91,8 +76,8 @@ class _userState extends State<user> {
                 List<Widget> Memberlist = [];
                 for (var tile in tiles) {
                   Username = tile.get('Member_Name');
-                  User_Amt = tile.get('Amount_Remaining');
-                  Memberlist.add(user_tile(Username, User_Amt));
+                  monthly = tile.get('monthly');
+                  Memberlist.add(user_tile(Username, monthly));
                 }
                 return _isloading
                     ? Center(

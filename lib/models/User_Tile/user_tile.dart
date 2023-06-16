@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 class user_tile extends StatefulWidget {
   final String Username;
-  final String amt_rem;
+  final int monthly;
   user_tile(
     @required this.Username,
-    @required this.amt_rem,
+    @required this.monthly,
   );
   @override
   State<user_tile> createState() => _user_tileState();
@@ -58,7 +58,7 @@ class _user_tileState extends State<user_tile> {
           ),
         ),
         subtitle: Text(
-          '${widget.amt_rem}/Month',
+          '${widget.monthly}/Month',
           style: TextStyle(color: Colors.grey),
         ),
       ),

@@ -1,21 +1,57 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:internship2/Providers/month_selector.dart';
 import 'package:internship2/Providers/custom_animated_bottom_bar.dart';
 import 'package:internship2/Providers/_buildBottomBar.dart';
 import '../../models/views/maturity_display.dart';
 import 'package:internship2/Screens/Menu.dart';
+import '../../models/views/due_display.dart';
 
 class maturity extends StatefulWidget {
   static const id = '/maturity';
+  maturity(
+    this.Location,
+  );
+  String Location;
   @override
-  State<maturity> createState() => _maturityState();
+  State<maturity> createState() => _maturityState(Location);
 }
 
 class _maturityState extends State<maturity> {
-  int _currentIndex = 1;
+  _maturityState(
+    this.Location,
+  );
+  String Location;
+  late String Member_Name;
+  late String Plan;
+  late String Account_No;
+  late Timestamp date_open;
+  late Timestamp date_mature;
+  String Type = 'Daily';
+  int value = 0;
+  var _isloading = false;
+  late final _firestone = FirebaseFirestore.instance;
+  int _currentIndex = 0;
+  int _currentIndex2 = 0;
   final _inactiveColor = Color(0xffEBEBEB);
+  void addData(List<Widget> Memberlist, size) {
+    Memberlist.add(
+      due_data(
+        size: size,
+        Member_Name: Member_Name,
+        Plan: Plan,
+        Account_No: Account_No,
+        date_mature: date_mature,
+        date_open: date_open,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+    int month = now.month;
+    int year = now.year;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -77,52 +113,68 @@ class _maturityState extends State<maturity> {
               child: _buildAboveBar(),
             ),
           ),
-          SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 12.0),
-              child: Row(
-                children: [
-                  Text(
-                    'Chiran Road',
-                    style: TextStyle(
-                      fontSize: 13.5,
-                      color: Color(0xff205955),
-                      fontWeight: FontWeight.w500,
+          StreamBuilder(
+              stream: _firestone
+                  .collection('new_account')
+                  .doc(Location)
+                  .collection(Location)
+                  .orderBy('Member_Name')
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      backgroundColor: Colors.lightBlueAccent,
                     ),
-                    textAlign: TextAlign.left,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Container(
-            height: size.height * 0.23,
-            child: maturity_data(size: size),
-          ),
-          Container(
-            height: size.height * 0.23,
-            child: maturity_data(size: size),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 12.0),
-            child: Row(
-              children: [
-                Text(
-                  'Rewa Road',
-                  style: TextStyle(
-                    fontSize: 13.5,
-                    color: Color(0xff205955),
-                    fontWeight: FontWeight.w500,
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-              ],
-            ),
-          ),
-          // Container(
-          //   height: size.height * 0.23,
-          //   child: due_data(size: size),
-          // ),
+                  );
+                }
+                final tiles = snapshot.data!.docs;
+                List<Widget> Memberlist = [];
+                for (var tile in tiles) {
+                  Member_Name = tile.get('Member_Name');
+                  Plan = tile.get('Plan');
+                  Account_No = tile.get('Account_No').toString();
+                  date_open = tile.get('Date_of_Opening');
+                  date_mature = tile.get('Date_of_Maturity');
+                  Type = tile.get('Type');
+                  final datem = DateTime.fromMillisecondsSinceEpoch(
+                      date_mature.millisecondsSinceEpoch);
+                  int yearm = datem.year;
+                  int monthm = datem.month;
+                  if (month >= monthm) {
+                    value = month - monthm;
+                  } else {
+                    monthm = 12 - monthm;
+                    value = month + monthm;
+                  }
+                  print(
+                      "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX $value");
+                  if (value == 00 && _currentIndex == 0)
+                    addData(Memberlist, size);
+                  else if ((value == 01) && _currentIndex == 1)
+                    addData(Memberlist, size);
+                  else if ((value <= 03 && value > 01) && _currentIndex == 2)
+                    addData(Memberlist, size);
+                  else if ((value <= 06 && value > 03) && _currentIndex == 3)
+                    addData(Memberlist, size);
+                }
+                return _isloading
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            SizedBox(
+                                height: size.height * 0.68,
+                                child: ListView.builder(
+                                  itemCount: Memberlist.length,
+                                  itemBuilder: (context, i) => Memberlist[i],
+                                )),
+                          ],
+                        ),
+                      );
+              }),
         ],
       ),
       bottomNavigationBar: buildBottomBar(),
@@ -146,17 +198,17 @@ class _maturityState extends State<maturity> {
           inactiveColor: _inactiveColor,
         ),
         AboveNavyBarItem(
-          alpha: '3 months',
+          alpha: '1 months',
+          activeColor: Colors.grey,
+          inactiveColor: _inactiveColor,
+        ),
+        AboveNavyBarItem(
+          alpha: '3 Months',
           activeColor: Colors.grey,
           inactiveColor: _inactiveColor,
         ),
         AboveNavyBarItem(
           alpha: '6 Months',
-          activeColor: Colors.grey,
-          inactiveColor: _inactiveColor,
-        ),
-        AboveNavyBarItem(
-          alpha: '1 Year',
           activeColor: Colors.grey,
           inactiveColor: _inactiveColor,
         ),

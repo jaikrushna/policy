@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 
 class place_tile extends StatefulWidget {
-  place_tile(this.Name, this.Location);
+  place_tile(this.Name, this.Count, this.Amount, this.Location);
   String Name;
-  String Location = '';
+  int Count;
+  int Amount;
+  String Location;
   @override
-  State<place_tile> createState() => _place_tileState(Name, Location);
+  State<place_tile> createState() =>
+      _place_tileState(Name, Count, Amount, Location);
 }
 
 class _place_tileState extends State<place_tile> {
-  _place_tileState(this.Name, this.Location);
+  _place_tileState(this.Name, this.Count, this.Amount, this.Location);
   // bool selected = false;
   late String Name;
+  int Count;
+  int Amount;
   String Location = '';
   bool sel = true;
   bool notsel = true;
@@ -46,14 +51,13 @@ class _place_tileState extends State<place_tile> {
           leading: Container(
             child: Image.asset('assets/house-line-fill 1.png'),
           ),
-          trailing: CircleAvatar(
-            backgroundColor: Color(0xff29756F),
-            child: Text(
-              '40',
-              style: TextStyle(
-                color: Colors.white60,
-              ),
-            ),
+          trailing: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Text('Clients:$Count'),
+              // Text('Amount Collected:$Amount')
+            ],
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),

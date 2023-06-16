@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:internship2/Screens/Account/Account_Master.dart';
+import 'package:internship2/Screens/Account/acc_screen.dart';
+import 'package:internship2/models/views/due_display.dart';
 import 'package:internship2/models/views/menu_tile.dart';
-import 'package:internship2/Screens/Due/due.dart';
-import 'package:internship2/Screens/Maturity/maturity.dart';
+import 'package:internship2/Screens/Due/due_screen.dart';
+import 'package:internship2/Screens/Maturity/mature_screen.dart';
 import 'package:internship2/Screens/Lapse/lapse.dart';
 
 class menu extends StatelessWidget {
@@ -22,13 +23,13 @@ class menu extends StatelessWidget {
                 tle: 'Account '
                     'Master',
                 logo: Image.asset('assets/menu/acc_master.png'),
-                route: acc_master.id,
+                route: acc_screen.id,
               ),
               menu_tile(
                 tle: 'Due '
                     'Account',
                 logo: Image.asset('assets/menu/due_acc.png'),
-                route: due.id,
+                route: due_screen.id,
               ),
             ],
           ),
@@ -55,7 +56,7 @@ class menu extends StatelessWidget {
                 tle: 'Maturity '
                     'Update',
                 logo: Image.asset('assets/menu/maturity.png'),
-                route: maturity.id,
+                route: mature_screen.id,
               ),
               menu_tile(
                 tle: 'Rokar',

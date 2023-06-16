@@ -32,6 +32,7 @@ class _newmemState extends State<newmem> {
   final _firestone = FirebaseFirestore.instance;
   bool selA = false;
   bool selB = true;
+  late int monthly = 0;
   var items = [
     'Monthly',
     'Daily',
@@ -550,11 +551,26 @@ class _newmemState extends State<newmem> {
                     ),
                     TextButton(
                         onPressed: () {
+                          final dateo = DateTime.fromMillisecondsSinceEpoch(
+                              date_open.millisecondsSinceEpoch);
+                          final yearo = dateo.year;
+                          final dayo = dateo.day;
+                          final datem = DateTime.fromMillisecondsSinceEpoch(
+                              date_mature.millisecondsSinceEpoch);
+                          final yearm = datem.year;
+                          final daym = datem.day;
+                          int gap1 = 12 - dayo;
+                          int gap2 = 12 - daym;
+                          int gap3 = yearm - yearo;
+                          monthly = gap3 * 12;
+                          monthly = monthly - gap1 - gap2;
+                          monthly = (int.parse(Premium_Plan) / monthly).floor();
                           _firestone
                               .collection('new_account')
                               .doc(Location)
                               .collection(Location)
-                              .add({
+                              .doc(Account_No)
+                              .set({
                             'Member_Name': Member_Name,
                             'Plan': Plan,
                             'Account_No': Account_No,
@@ -567,6 +583,8 @@ class _newmemState extends State<newmem> {
                             'Date_of_Opening': date_open,
                             'CIF_No': CIF_No,
                             'Premium_Plan': Premium_Plan,
+                            'status': '',
+                            'monthly': monthly,
                           });
                           setState(() {
                             Navigator.of(context).pop();

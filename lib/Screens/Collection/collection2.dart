@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:internship2/Providers/scheme_selector.dart';
 import 'package:internship2/Providers/_buildBottomBar.dart';
+import 'package:internship2/Screens/Collection/collection.dart';
 import '../../models/views/due_display.dart';
-import 'package:internship2/Screens/Menu.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class collection2 extends StatefulWidget {
+  collection2(
+    this.Location,
+  );
+  String Location;
   static const id = '/collection2';
   @override
-  State<collection2> createState() => _collection2State();
+  State<collection2> createState() => _collection2State(Location);
 }
 
 class _collection2State extends State<collection2> {
+  _collection2State(
+    this.Location,
+  );
+  String Location;
   late String Member_Name;
   late String Plan;
   late String Account_No;
@@ -57,7 +65,7 @@ class _collection2State extends State<collection2> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const menu()),
+              MaterialPageRoute(builder: (context) => collection(1)),
             );
           },
           icon: Icon(
@@ -122,6 +130,8 @@ class _collection2State extends State<collection2> {
           StreamBuilder(
               stream: _firestone
                   .collection('new_account')
+                  .doc(Location)
+                  .collection(Location)
                   .orderBy('Member_Name')
                   .snapshots(),
               builder: (context, snapshot) {
@@ -159,7 +169,7 @@ class _collection2State extends State<collection2> {
                         child: Column(
                           children: [
                             SizedBox(
-                                height: size.height,
+                                height: size.height * 0.61,
                                 child: ListView.builder(
                                   itemCount: Memberlist.length,
                                   itemBuilder: (context, i) => Memberlist[i],

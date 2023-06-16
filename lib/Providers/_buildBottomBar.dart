@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:internship2/Providers/custom_animated_bottom_bar.dart';
-import 'package:internship2/Screens/place_edit.dart';
+import 'package:internship2/Screens/Place/place_edit.dart';
 
 class buildBottomBar extends StatefulWidget {
   @override

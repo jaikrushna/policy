@@ -8,11 +8,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class acc_master extends StatefulWidget {
   static const id = '/acc_master';
+  acc_master(
+    this.Location,
+  );
+  String Location;
   @override
-  State<acc_master> createState() => _acc_masterState();
+  State<acc_master> createState() => _acc_masterState(Location);
 }
 
 class _acc_masterState extends State<acc_master> {
+  _acc_masterState(
+    this.Location,
+  );
+  String Location;
   int _currentIndex = 1;
   int _currentscheme = 0;
   late String Member_Name;
@@ -23,6 +31,19 @@ class _acc_masterState extends State<acc_master> {
   var _isloading = false;
   late final _firestone = FirebaseFirestore.instance;
   final _inactiveColor = Color(0xffEBEBEB);
+  void addData(List<Widget> Memberlist, size) {
+    Memberlist.add(
+      displayeddata(
+        size: size,
+        Member_Name: Member_Name,
+        Plan: Plan,
+        Account_No: Account_No,
+        date_mature: date_mature,
+        date_open: date_open,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -107,6 +128,8 @@ class _acc_masterState extends State<acc_master> {
           StreamBuilder(
               stream: _firestone
                   .collection('new_account')
+                  .doc(Location)
+                  .collection(Location)
                   .orderBy('Member_Name')
                   .snapshots(),
               builder: (context, snapshot) {
@@ -125,16 +148,13 @@ class _acc_masterState extends State<acc_master> {
                   Account_No = tile.get('Account_No').toString();
                   date_open = tile.get('Date_of_Opening');
                   date_mature = tile.get('Date_of_Maturity');
-                  Memberlist.add(
-                    displayeddata(
-                      size: size,
-                      Member_Name: Member_Name,
-                      Plan: Plan,
-                      Account_No: Account_No,
-                      date_mature: date_mature,
-                      date_open: date_open,
-                    ),
-                  );
+                  if (_currentIndex == 1) {
+                    if (Plan == 'A') addData(Memberlist, size);
+                  } else if (_currentIndex == 2) {
+                    if (Plan == 'B') addData(Memberlist, size);
+                  } else {
+                    addData(Memberlist, size);
+                  }
                 }
                 return _isloading
                     ? Center(
@@ -143,7 +163,7 @@ class _acc_masterState extends State<acc_master> {
                     : Column(
                         children: [
                           SizedBox(
-                              height: size.height,
+                              height: size.height * 0.68,
                               child: ListView.builder(
                                 itemCount: Memberlist.length,
                                 itemBuilder: (context, i) => Memberlist[i],
@@ -151,27 +171,6 @@ class _acc_masterState extends State<acc_master> {
                         ],
                       );
               })
-          // Padding(
-          //   padding: const EdgeInsets.only(left: 12.0),
-          //   child: Row(
-          //     children: [
-          //       Text(
-          //         'Rewa Road',
-          //         style: TextStyle(
-          //           fontSize: 13.5,
-          //           color: Color(0xff205955),
-          //           fontWeight: FontWeight.w500,
-          //         ),
-          //         textAlign: TextAlign.left,
-          //       ),
-          // Text(
-          //   'Chiran Road',
-          //   textAlign: TextAlign.left,
-          // ),
-          //     ],
-          //   ),
-          // ),
-          // displayeddata(size: size),
         ],
       ),
       bottomNavigationBar: buildBottomBar(),
