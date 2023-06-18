@@ -27,6 +27,12 @@ class _maturityState extends State<maturity> {
   late String Account_No;
   late Timestamp date_open;
   late Timestamp date_mature;
+  late String mode;
+  late int installment;
+  late String status;
+  late int Amount_Collected;
+  late int Amount_Remaining;
+  late int Monthly;
   String Type = 'Daily';
   int value = 0;
   var _isloading = false;
@@ -43,6 +49,13 @@ class _maturityState extends State<maturity> {
         Account_No: Account_No,
         date_mature: date_mature,
         date_open: date_open,
+        mode: mode,
+        installment: installment,
+        status: status,
+        Location: Location,
+        Amount_Collected: Amount_Collected,
+        Amount_Remaining: Amount_Remaining,
+        Monthly: Monthly,
       ),
     );
   }
@@ -137,6 +150,12 @@ class _maturityState extends State<maturity> {
                   date_open = tile.get('Date_of_Opening');
                   date_mature = tile.get('Date_of_Maturity');
                   Type = tile.get('Type');
+                  mode = tile.get('mode');
+                  status = tile.get('status');
+                  installment = tile.get('installment');
+                  Amount_Remaining = tile.get('Amount_Remaining');
+                  Amount_Collected = tile.get('Amount_Collected');
+                  Monthly = tile.get('monthly');
                   final datem = DateTime.fromMillisecondsSinceEpoch(
                       date_mature.millisecondsSinceEpoch);
                   int yearm = datem.year;

@@ -22,9 +22,13 @@ class _newmemState extends State<newmem> {
   String Plan = 'B';
   late String Account_No;
   late String Address;
-  late String Amount_Collected;
-  late String Amount_Remaining;
+  late int Amount_Collected;
+  late int Amount_Remaining;
   late String Phone_No;
+  String mode = 'cash';
+  int installment = 0;
+  int money = 0;
+  String status = 'Due';
   String Type = 'Daily';
   late String Premium_Plan;
   late String CIF_No;
@@ -62,6 +66,7 @@ class _newmemState extends State<newmem> {
   DateTime date_mature = DateTime(2030, 1, 15);
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         body: Container(
@@ -69,12 +74,10 @@ class _newmemState extends State<newmem> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Flexible(
-              child: Container(
-                height: size.height * 0.36,
-                decoration: BoxDecoration(
-                  color: Color(0xff757575),
-                ),
+            Container(
+              height: size.height * 0.36,
+              decoration: BoxDecoration(
+                color: Color(0xff757575),
               ),
             ),
             Container(
@@ -429,7 +432,7 @@ class _newmemState extends State<newmem> {
                                 ),
                                 textAlign: TextAlign.left,
                                 onChanged: (value) {
-                                  Amount_Collected = value;
+                                  Amount_Collected = int.parse(value);
                                 },
                                 decoration: InputDecoration(
                                     hintText: 'Amount Collected')),
@@ -457,7 +460,7 @@ class _newmemState extends State<newmem> {
                                 ),
                                 textAlign: TextAlign.left,
                                 onChanged: (value) {
-                                  Amount_Remaining = value;
+                                  Amount_Remaining = int.parse(value);
                                 },
                                 decoration: InputDecoration(
                                     hintText: 'Amount Remaining')),
@@ -585,6 +588,11 @@ class _newmemState extends State<newmem> {
                             'Premium_Plan': Premium_Plan,
                             'status': '',
                             'monthly': monthly,
+                            'mode': mode,
+                            'installment': 0,
+                            'status': status,
+                            'payment_date':
+                                '${now.year}-${now.month}-${now.day}',
                           });
                           setState(() {
                             Navigator.of(context).pop();

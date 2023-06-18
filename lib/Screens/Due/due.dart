@@ -27,7 +27,12 @@ class _dueState extends State<due> {
   late String Account_No;
   late Timestamp date_open;
   late Timestamp date_mature;
-  String status = 'Due';
+  late String mode;
+  late int installment;
+  late String status;
+  late int Amount_Collected;
+  late int Amount_Remaining;
+  late int Monthly;
   var _isloading = false;
   late final _firestone = FirebaseFirestore.instance;
   int _currentIndex = 1;
@@ -42,6 +47,13 @@ class _dueState extends State<due> {
         Account_No: Account_No,
         date_mature: date_mature,
         date_open: date_open,
+        mode: mode,
+        installment: installment,
+        status: status,
+        Location: Location,
+        Amount_Collected: Amount_Collected,
+        Amount_Remaining: Amount_Remaining,
+        Monthly: Monthly,
       ),
     );
   }
@@ -154,6 +166,12 @@ class _dueState extends State<due> {
                     Account_No = tile.get('Account_No').toString();
                     date_open = tile.get('Date_of_Opening');
                     date_mature = tile.get('Date_of_Maturity');
+                    mode = tile.get('mode');
+                    status = tile.get('status');
+                    installment = tile.get('installment');
+                    Amount_Remaining = tile.get('Amount_Remaining');
+                    Amount_Collected = tile.get('Amount_Collected');
+                    Monthly = tile.get('monthly');
                     str(Account_No);
                     if (_currentIndex == 1) {
                       if (Plan == 'A')
